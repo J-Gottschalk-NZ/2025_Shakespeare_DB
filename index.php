@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/sand_style.css" />
     <link rel="stylesheet" href="css/side_panel.css">
+    <link rel="stylesheet" href="css/forms.css">
 
 
     <!-- Links to javascript - use defer to prevent javascript trying to load before elements have been created -->
@@ -21,6 +22,9 @@
     
   </head>
   <body>
+
+  <!-- Temporary code to see screen width for media queries. -->
+  <?php include('screen_size.php');?>
 
   <div class="wrapper">
 
@@ -49,11 +53,46 @@
       </div>
 
       <div class="nav-items">
-      
-      <span>thing 1</span>
-      <span>thing 2</span>
-      <span>thing 3</span>
 
+          <a href="#" class='nav-button'><span>Random&nbsp;&nbsp;</span><i class="fa-solid fa-shuffle"></i></a>
+      
+         <!-- Play Search -->           
+        <form class="key-search" method="post" action="index.php?page=#" enctype="multipart/form-data">
+
+            <input class="search quicksearch" type="text" name="play_search_term" value="" required placeholder="Play">
+
+            <button type="submit" class="submit" name="play_search">
+                <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 
+            </button>
+
+        </form>     <!-- / play search -->    
+
+        <!-- Character Search -->           
+        <form class="key-search" method="post" action="index.php?page=#" enctype="multipart/form-data">
+
+            <input class="search quicksearch" type="text" name="character_search_term" value="" required placeholder="Character">
+
+            <button type="submit" class="submit" name="character_search">
+                <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 
+            </button>
+
+        </form>     <!-- / character search -->    
+
+        <!-- Death Search -->           
+        <form class="key-search" method="post" action="index.php?page=#" enctype="multipart/form-data">
+
+            <input class="search quicksearch" type="text" name="death_search_term" value="" required placeholder="Death">
+
+            <button type="submit" class="submit" name="death_search">
+                <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 
+            </button>
+
+        </form>     <!-- / character search -->   
+
+        <!-- Log in / logout button -->
+        <a class="nav-button" href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
+
+        
     </div>    <!-- /  nav items -->
 
     </nav>
