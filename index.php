@@ -12,7 +12,7 @@
     <!-- Link to make font Awesome work -->
     <script src="https://kit.fontawesome.com/37c3bd2981.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/sand_style.css" />
+    <link rel="stylesheet" type="text/css" href="css/sand_style.css">
     <link rel="stylesheet" href="css/side_panel.css">
     <link rel="stylesheet" href="css/forms.css">
 
@@ -23,8 +23,6 @@
   </head>
   <body>
 
-  <!-- Temporary code to see screen width for media queries. -->
-  <?php include('screen_size.php');?>
 
   <div class="wrapper">
 
@@ -38,24 +36,33 @@
 
     <nav>
 
+     <a href="#" class='nav-button' title="Displays five random characters"><i class="fa-solid fa-shuffle"></i></a>
+
+
       <?php include("filter-box.php"); ?>
-      <div class="filter">
 
         <!-- Filter button - uses Javascript... -->
 
-        <a href="#" class="nav-button" onclick="openNav()">
-        <i class="fa-solid fa-filter"></i></a>
-
-    </div>
+        <a href="#" class="nav-button" title="Filter results based play, role etc" onclick="openNav()">
+        <i class="fa-solid fa-filter"></i></a>      
 
       <div class="hamburger">
-      <i class="fa-solid fa-bars" onclick="changeIcon(this)"></i>
+      <i class="fa-solid fa-search" onclick="changeIcon(this)"></i>
       </div>
 
       <div class="nav-items">
 
-          <a href="#" class='nav-button'><span>Random&nbsp;&nbsp;</span><i class="fa-solid fa-shuffle"></i></a>
-      
+        <!-- Quick Search -->           
+        <form class="key-search" method="post" action="index.php?page=#" enctype="multipart/form-data">
+
+            <input class="search quicksearch" type="text" name="quick_search_term" value="" required placeholder="Quick">
+
+            <button type="submit" class="submit" name="quick_search">
+            <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 
+            </button>
+
+        </form>     <!-- / quick search -->   
+
          <!-- Play Search -->           
         <form class="key-search" method="post" action="index.php?page=#" enctype="multipart/form-data">
 
@@ -89,13 +96,18 @@
 
         </form>     <!-- / character search -->   
 
-        <!-- Log in / logout button -->
-        <a class="nav-button" href="#"><i class="fa-solid fa-right-to-bracket"></i></a>
-
-        
+      
     </div>    <!-- /  nav items -->
 
+
     </nav>
+
+    <div class="log-in-out">
+            <!-- Log in / logout button -->
+            <a class="nav-button" href="#"><i class="fa-solid fa-right-to-bracket"></i></a> 
+
+
+    </div>  <!-- / log-in-out -->
 
     <main class="common">
         Main content goes here
