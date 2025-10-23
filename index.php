@@ -12,13 +12,13 @@
     <!-- Link to make font Awesome work -->
     <script src="https://kit.fontawesome.com/37c3bd2981.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="css/sand_style.css">
+    <link rel="stylesheet" type="text/css" href="css/shake_style.css">
     <link rel="stylesheet" href="css/side_panel.css">
     <link rel="stylesheet" href="css/forms.css">
 
 
     <!-- Links to javascript - use defer to prevent javascript trying to load before elements have been created -->
-    <script src="js/side_bar.js" defer></script>
+    <script src="js/shake_script.js" defer></script>
     
   </head>
   <body>
@@ -110,32 +110,27 @@
     </div>  <!-- / log-in-out -->
 
     <main class="common">
-        Main content goes here
+
+    <h2>Welcome</h2>
+
+    <p>Use the random / filter / search tools above to explore the characters in Shakespeare's plays.  Here are some featured characters to get you started.
+
     </main>
 
     <footer class="common">
-        Footer goes here
+        <div class="footer-left-text">
+            <a href="#">Icon Legends</a>
+            <a href="#">Credits / Attribution</a>
+
+        </div>      <!-- left footer -->
+
+        <span>CC Miss Gottschalk</span>
+
+
     </footer>
 
 </div>  <!-- / wrapper -->
 
-<!-- Javascript to make Hamburger icon change to cross -->
-<script>
-  const hamburger = document.querySelector('.hamburger');
-  const navLinks = document.querySelector('.nav-items');
-  const icon = hamburger.querySelector('i');
-
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-    icon.classList.toggle('fa-xmark');
-    icon.classList.toggle('fa-bars');
-
-  });
-
-  // // Change hamburger to cross when menu opened
-  //  changeIcon = (icon) => icon.classList.toggle('fa-xmark')
-
-  </script>
 
   </body>
 </html>
