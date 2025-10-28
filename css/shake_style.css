@@ -37,14 +37,12 @@ font-family: "Libre Baskerville", serif;
 
 .logo-banner {
   grid-area: logo-banner;
-  /* background-color: red; */
   display: flex;
   align-content: flex-start;
 }
 
 nav {
   grid-area: nav;
-  /* background-color: #3f44a3; */
   display: flex;
   align-content: flex-start;
   align-items: baseline;
@@ -54,7 +52,6 @@ nav {
 
 .log-in-out{
   grid-area: log-in-out;
-  /* background-color: #cba7cf; */
   display: flex;
   justify-content: flex-end;
   margin-right: 20px;
@@ -147,7 +144,6 @@ footer div a:hover{
   .nav-items {
     display: none;
     flex-direction: column;
-    background-color: #cba7cf;
     padding: 10px;
     border-radius: 5px;
     height: auto;
@@ -162,10 +158,14 @@ footer div a:hover{
 
   .hamburger {
     display: inline-block;
-    background-color: #cba7cf;
     padding: 10px;
     margin-right: 10px;
   }
 
+
+  .nav-combo {
+    background-color: #cba7cf;
+    border-radius: 5px;
+  }
 
 }
