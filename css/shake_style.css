@@ -79,6 +79,34 @@ footer{
 
 }
 
+.center-image{
+    display: flex;
+    justify-content: center;
+}
+
+.no-results-message {
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.error-image
+{
+    border-radius: 10px;
+    max-width: 350px;
+    align-self: center;   /* prevents image being distorted */
+}
+
+.error {
+  background-color: #F7BEBE;
+  color: #660000;
+  border: 2px solid #660000;
+  padding: 20px;
+  border-radius: 10px;
+}
+
 /* Navigation Styling */
 a.nav-button{
     border-radius: 5px;
@@ -166,6 +194,14 @@ footer div a:hover{
   .nav-combo {
     background-color: #cba7cf;
     border-radius: 5px;
+  }
+
+
+}
+
+@media screen and (max-width: 1081x) {
+    .error-image {
+    margin-bottom: 20px;  /* puts space between image and text when stacked */
   }
 
 }

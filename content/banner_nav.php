@@ -1,5 +1,7 @@
     <div class="common logo-banner">
+        <a href="index.php">
         <img class="logo-image" src="images/logo.png" alt="Line drawing of William Shakespear" height="75">
+    </a>
 
         <h1>Shakespeare's People</h1>
     </div>  <!-- / logo-banner --> 
@@ -8,7 +10,7 @@
 
     <nav>
 
-     <a href="#" class='nav-button' title="Displays five random characters"><i class="fa-solid fa-shuffle"></i></a>
+     <a href="index.php?page=content/random" class='nav-button' title="Displays five random characters"><i class="fa-solid fa-shuffle"></i></a>
 
 
       <?php include("filter-box.php"); ?>
