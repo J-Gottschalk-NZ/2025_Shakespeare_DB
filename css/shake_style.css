@@ -39,6 +39,7 @@ font-family: "Libre Baskerville", serif;
   grid-area: logo-banner;
   display: flex;
   align-content: flex-start;
+  align-items: center;
 }
 
 nav {
@@ -76,12 +77,28 @@ footer{
     background-color: white;
     margin-right: 20px;
     padding: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 75px;
+    width: auto;
 
 }
 
 .center-image{
     display: flex;
     justify-content: center;
+}
+
+h1 {
+  font-size: 300%;
+}
+
+h2 {
+  font-size: 200%;
+}
+
+h2.search-heading {
+  font-size: 250%;
 }
 
 .no-results-message {
@@ -113,6 +130,7 @@ a.nav-button{
     text-decoration: none;
     margin-right: 10px;
     padding: 10px;
+    font-size: 150%;
 
     /* Make buttons resize to width of content */
     flex-shrink: 0;
@@ -167,7 +185,7 @@ footer div a:hover{
 
 
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1380px) {
   
   .nav-items {
     display: none;
@@ -188,6 +206,7 @@ footer div a:hover{
     display: inline-block;
     padding: 10px;
     margin-right: 10px;
+    font-size: 150%;
   }
 
 

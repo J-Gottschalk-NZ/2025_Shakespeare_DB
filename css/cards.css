@@ -1,17 +1,19 @@
 .char-details{
-    background-color: #fff;
-    color: #000;
-
-    width: 350px;
-
-    border: 1px solid black;
-    border-radius: 5px;
+  background-color: #fff;
+  color: #5e3163;
+  width: 450px;
+  border: 4px solid white;
+  border-radius: 5px;
+  margin: 10px;
+  box-shadow: 5px 5px 15px #000;
 }
 
 .character-name {
-    font-size: 24pt;
-    text-align: center;
-    padding: 10px;
+font-size: 24pt;
+  text-align: center;
+  padding: 10px;
+  background-color: #5e3163;
+  color: #fff;
 }
 
 .play-title{
@@ -72,7 +74,7 @@ a.play, a.trait{
 /* Set category icon to 50px */
 .icon-row a img {
     border: 1px solid #000;
-    padding: 5px;
+    padding: 15px;
     border-radius: 10px;
     width: 45px;
     background-color: #FCC272;
@@ -94,13 +96,15 @@ a.play, a.trait{
 }
 
 .trait-tags a{
-    padding: 5px;
+    padding: 10px;
     margin-right: 5px;
     background-color: #cba7cf;
     border: 2px solid #5E3163;
 
     border-radius: 5px;
     text-decoration: none;
+
+    font-size: 105%;
 }
 
 .trait-tags a:hover{

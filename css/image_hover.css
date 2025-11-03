@@ -28,7 +28,10 @@
 }
 
 .container:hover .overlay {
-  width: 400px;
+  width: 475px;
+
+  /* needed so image is completely covered by card */
+  background-color: #5e3163;  
 }
 
 .card-container {

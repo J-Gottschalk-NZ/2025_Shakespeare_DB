@@ -21,6 +21,7 @@ font-family: "Libre Baskerville", serif;
     border-radius: 5px 0 0 5px; 
     display: inline-block;
     padding: 10px;
+    font-size: 150%;;
 }
 
 
@@ -32,7 +33,7 @@ font-family: "Libre Baskerville", serif;
 .submit {
     position:relative;
     width: 45px;
-    font-size: 14px;
+    font-size: 150%;
     
     left:-5px;
     background-color: #cba7cf; 
@@ -41,6 +42,7 @@ font-family: "Libre Baskerville", serif;
     border-radius: 0 5px 5px 0;   
     display: inline-block;
     padding: 10px;
+    padding-bottom: 13px;
 }
 
 .submit:hover {
