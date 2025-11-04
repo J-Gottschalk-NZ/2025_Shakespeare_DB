@@ -57,4 +57,10 @@ function get_query($dbconnect, $sql_condition)
 
 }
 
+function to_clean($data) {
+	$data = trim($data);	
+	$data = htmlspecialchars($data); //  needed for correct special character rendering
+	return $data;
+}
+
 ?>

@@ -1,8 +1,11 @@
     <?php
 
     // retrieve search type
-    $search_type = ($_REQUEST['search_type']);
-    $search_term = ($_REQUEST['search_term']);
+    $search_type = to_clean($_REQUEST['search_type']);
+    $search_term = to_clean($_REQUEST['search_term']);
+
+    echo "Term: ".$search_term."<br>";
+    echo "type: ".$search_type;
 
     $help_text = "";
 
@@ -42,6 +45,15 @@
     elseif ($search_type == "method")
     {
     $sql_condition = "WHERE `Method` LIKE '$search_term'";    
+    }
+
+    // trait search!
+    else {
+    $sql_condition = "WHERE 
+    k1.Trait LIKE '$search_term'
+    OR k2.Trait LIKE '$search_term'
+    OR k3.Trait LIKE '$search_term'
+    ";
     }
 
 

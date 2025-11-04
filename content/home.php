@@ -2,6 +2,7 @@
 
     <p>Use the random / filter / search tools above to explore the characters in Shakespeare's plays.  Here are some featured characters to get you started.
     </p>
+    <p>&nbsp;</p>
 
 
     <div class='all-cards'>

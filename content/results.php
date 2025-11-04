@@ -11,7 +11,6 @@
             <?=  $heading; ?> (<?=  $find_count?> results)
         </h2>
 
-
     <div class='all-cards'>
 
 
@@ -94,9 +93,9 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
     </div>
 
     <div class="trait-tags">
-        <a href="#" class="trait"><?=  $triat1; ?></a>
-        <a href="#" class="trait"><?=  $triat2; ?></a>
-        <a href="#" class="trait"><?=  $triat3; ?></a>
+        <a href="<?=  $click_type?>trait<?=  $click_term.$triat1; ?>" class="trait"><?=  $triat1; ?></a>
+        <a href="<?=  $click_type?>trait<?=  $click_term.$triat2; ?>" class="trait"><?=  $triat2; ?></a>
+        <a href="<?=  $click_type?>trait<?=  $click_term.$triat3; ?>" class="trait"><?=  $triat3; ?></a>
 
     </div>  <!-- / trait tags -->
 

@@ -1,3 +1,9 @@
+.all-cards {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
 .char-details{
   background-color: #fff;
   color: #5e3163;
@@ -12,7 +18,7 @@
 font-size: 24pt;
   text-align: center;
   padding: 10px;
-  background-color: #5e3163;
+  background-color: #8e6593;
   color: #fff;
 }
 
@@ -105,6 +111,7 @@ a.play, a.trait{
     text-decoration: none;
 
     font-size: 105%;
+    margin-top: 5px;
 }
 
 .trait-tags a:hover{
