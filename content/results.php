@@ -8,7 +8,7 @@
     ?>
 
         <h2 class="search-heading">
-            <?php echo $heading; ?> (<?php echo $find_count?> results)
+            <?=  $heading; ?> (<?=  $find_count?> results)
         </h2>
 
 
@@ -53,33 +53,50 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
 
 <div class="char-details">
 
-    <div class="character-name"><?php echo $character; ?></div>
+    <div class="character-name"><?=  $character; ?></div>
 
     <div class="play-title">
-        <a title="<?php echo $category; ?>" class="category" 
-        href="<?php echo $click_type?>category<?php echo $click_term.$category; ?>">
-            <img src="<?php echo $category_icon; ?>" alt="<?php echo $category; ?>">
+        <a title="<?=  $category; ?>" class="category" 
+        href="<?=  $click_type?>category<?=  $click_term.$category; ?>">
+            <img src="<?=  $category_icon; ?>" alt="<?=  $category; ?>">
         </a>
-        <a class="play" href="index.php?page=content/click_search&search_type=play&search_term=<?php echo $play; ?>"><?php echo $play; ?></a>
+        <a class="play" href="index.php?page=content/click_search&search_type=play&search_term=<?=  $play; ?>"><?=  $play; ?></a>
     </div>
 
+    <?php
+
+    // list to hold icons to easily generate 'icon row'
+    // Title (and alt) | URL | icon     
+
+    $all_icons = [
+
+        [$gender, $click_type."gender".$click_term.$gender, $gender_icon],
+        [$role, $click_type."role".$click_term.$role, $role_icon],
+        [$alignment, $click_type."alignment".$click_term.$alignment, $alignment_icon],
+        [$action, $click_type."action".$click_term.$action, $action_icon],
+        [$method, $click_type."method".$click_term.$method, $method_icon]
+
+    ];
+
+    ?>
+
     <div class="icon-row">
-            <a title="<?php echo $gender; ?>" href="#"><img src="<?php echo $gender_icon; ?>" alt="<?php echo $gender; ?>" ></a>
-            <a title="<?php echo $role; ?>" href="#"><img src="<?php echo $role_icon; ?>" alt="<?php echo $role_icon; ?>"></a>
-            <a title="<?php echo $alignment_icon; ?>" href="#"><img src="<?php echo $alignment_icon; ?>" alt="<?php echo $alignment?>"></a>            
-            <a title="<?php echo $action; ?>" href="#"><img src="<?php echo $action_icon; ?>" alt="<?php echo $action; ?>"></a>
-            <a title="<?php echo $method; ?>" href="#"><img src="<?php echo $method_icon; ?>" alt="<?php echo $method; ?>"></a>            
+
+    <?php foreach($all_icons as $item): ?>
+            <a title="<?= $item[0]; ?>" href="<?= $item[1]; ?>"><img src="<?= $item[2]; ?>" alt="<?= $item[0]; ?>" ></a>  
+            
+    <?php endforeach; ?>
     
     </div> <!-- / icon row -->
 
     <div class="description">
-    <?php echo $find_rs['Description']; ?>
+    <?=  $find_rs['Description']; ?>
     </div>
 
     <div class="trait-tags">
-        <a href="#" class="trait"><?php echo $triat1; ?></a>
-        <a href="#" class="trait"><?php echo $triat2; ?></a>
-        <a href="#" class="trait"><?php echo $triat3; ?></a>
+        <a href="#" class="trait"><?=  $triat1; ?></a>
+        <a href="#" class="trait"><?=  $triat2; ?></a>
+        <a href="#" class="trait"><?=  $triat3; ?></a>
 
     </div>  <!-- / trait tags -->
 
