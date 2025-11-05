@@ -1,5 +1,5 @@
 <?php // retrieve data
-    list($find_query, $find_count) = get_query($dbconnect, $sql_condition);
+    list($find_query, $find_count) = get_query($dbconnect, $sql_condition, $search_term);
 
 
     if($find_count > 0)

@@ -4,8 +4,6 @@
     $search_type = to_clean($_REQUEST['search_type']);
     $search_term = to_clean($_REQUEST['search_term']);
 
-    echo "Term: ".$search_term."<br>";
-    echo "type: ".$search_type;
 
     $help_text = "";
 
@@ -14,37 +12,37 @@
 
     if ($search_type == "play")
     {
-    $sql_condition = "WHERE `Play` LIKE '$search_term'";    
+    $sql_condition = "WHERE `Play` LIKE ?";    
     }
 
     elseif ($search_type == "category")
     {
-    $sql_condition = "WHERE `Play_Cat` LIKE '$search_term'";    
+    $sql_condition = "WHERE `Play_Cat` LIKE ?";    
     }
 
     elseif ($search_type == "gender")
     {
-    $sql_condition = "WHERE `M_or_F` LIKE '$search_term'";    
+    $sql_condition = "WHERE `M_or_F` LIKE ?";    
     }
 
     elseif ($search_type == "role")
     {
-    $sql_condition = "WHERE `Role` LIKE '$search_term'";    
+    $sql_condition = "WHERE `Role` LIKE ?";    
     }
 
     elseif ($search_type == "alignment")
     {
-    $sql_condition = "WHERE `Alignment` LIKE '$search_term'";    
+    $sql_condition = "WHERE `Alignment` LIKE ?";    
     }
 
     elseif ($search_type == "action")
     {
-    $sql_condition = "WHERE `Action` LIKE '$search_term'";    
+    $sql_condition = "WHERE `Action` LIKE ?";    
     }
 
     elseif ($search_type == "method")
     {
-    $sql_condition = "WHERE `Method` LIKE '$search_term'";    
+    $sql_condition = "WHERE `Method` LIKE ?";    
     }
 
     // trait search!

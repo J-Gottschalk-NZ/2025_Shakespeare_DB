@@ -1,6 +1,6 @@
 <?php
 
-function get_query($dbconnect, $sql_condition)
+function get_query($dbconnect, $sql_condition, $search_term)
 {
 
     // s ==> shake_data table
@@ -49,7 +49,22 @@ function get_query($dbconnect, $sql_condition)
     // Add where / random / recent condition
 	$find_sql .= $sql_condition;
 
-    $find_query = mysqli_query($dbconnect, $find_sql);
+    $stmt = mysqli_stmt_init($dbconnect);
+
+    // check to see if statement fails
+    if (!mysqli_stmt_prepare($stmt, $find_sql)) {
+        echo "Oops - something went wrong with your prepared statement";
+
+    }
+    
+    else {
+        // bind statement to parameters
+        mysqli_stmt_bind_param($stmt, "s", $search_term);
+        mysqli_stmt_execute($stmt);
+        $find_query = mysqli_stmt_get_result($stmt);
+    }
+
+    // $find_query = mysqli_query($dbconnect, $find_sql);
     $find_count = mysqli_num_rows($find_query);	
 
     // returns query and number of results
@@ -59,7 +74,6 @@ function get_query($dbconnect, $sql_condition)
 
 function to_clean($data) {
 	$data = trim($data);	
-	$data = htmlspecialchars($data); //  needed for correct special character rendering
 	return $data;
 }
 
