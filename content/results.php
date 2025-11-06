@@ -1,5 +1,5 @@
 <?php // retrieve data
-    list($find_query, $find_count) = get_query($dbconnect, $sql_condition, $search_term);
+    list($find_query, $find_count) = get_query($dbconnect, $sql_condition, $params);
 
 
     if($find_count > 0)
@@ -11,7 +11,9 @@
             <?=  $heading; ?> (<?=  $find_count?> results)
         </h2>
 
-    <div class='all-cards'>
+<div class="cards-outer">
+    
+<div class='all-cards'>
 
 
         <?php
@@ -48,7 +50,7 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
     ?>
 
 
-</p>
+
 
 <div class="char-details">
 
@@ -102,9 +104,6 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
     </div>  <!-- / card container -->
 
 
-
-
-
     <?php
 
 }   // end results while
@@ -113,6 +112,8 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
 
 
     </div>  <!-- / all-cards -->
+
+</div>  <!-- / cards outer -->
 
 <?php
 

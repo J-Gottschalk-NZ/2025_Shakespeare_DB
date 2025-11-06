@@ -1,17 +1,24 @@
+/* the actual cards container is inline-flex and wraps rows */
 .all-cards {
-    margin: auto;
-    display: flex;
+    display: grid;
+    grid-template-rows: auto;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fit, 450px);
+    gap: 40px;
+
     justify-content: center;
 }
 
 .char-details{
-  background-color: #fff;
-  color: #5e3163;
-  width: 450px;
-  border: 4px solid white;
-  border-radius: 5px;
-  margin: 10px;
-  box-shadow: 5px 5px 15px #000;
+ 
+    background-color: #fff;
+    color: #5e3163;
+    width: 100%;
+    border: 4px solid white;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px #000;
+    text-align: left;
+
 }
 
 .character-name {
@@ -63,7 +70,7 @@ a.play, a.trait{
     background-color: #5E3163;
     color: #fff;
     font-weight: bold;
-    padding: 8px;
+    /* padding: 8px; */
 }
 
 
@@ -119,3 +126,4 @@ a.play, a.trait{
     color: #fff;
     font-weight: bold;
 }
+

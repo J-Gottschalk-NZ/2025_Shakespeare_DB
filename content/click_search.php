@@ -4,11 +4,14 @@
     $search_type = to_clean($_REQUEST['search_type']);
     $search_term = to_clean($_REQUEST['search_term']);
 
+    // default params (one search term)
+    $params = [$search_term];
 
     $help_text = "";
 
     $heading=$search_term;
     $order = " ORDER BY s.Character_Name ASC";
+
 
     if ($search_type == "play")
     {
@@ -48,13 +51,12 @@
     // trait search!
     else {
     $sql_condition = "WHERE 
-    k1.Trait LIKE '$search_term'
-    OR k2.Trait LIKE '$search_term'
-    OR k3.Trait LIKE '$search_term'
+    k1.Trait LIKE ?
+    OR k2.Trait LIKE ?
+    OR k3.Trait LIKE ?
     ";
+    $params = [$search_term, $search_term, $search_term];  // repeat for each placeholder
     }
-
-
 
     // add in order by character name...
     $sql_condition = $sql_condition.$order;

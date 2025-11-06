@@ -2,6 +2,11 @@
 
     <p>Use the random / filter / search tools above to explore the characters in Shakespeare's plays.  Here are some featured characters to get you started.
     </p>
+
+    <p>
+        Please hover over the images below to learn more about each character.
+    </p>
+
     <p>&nbsp;</p>
 
 

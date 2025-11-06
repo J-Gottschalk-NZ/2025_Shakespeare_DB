@@ -1,11 +1,7 @@
-.all-cards{
-    display: flex;
-    flex-wrap: wrap;
-}
+
 
 .container {
   position: relative;
-  /* width: 50%; */
   margin: 20px;
 }
 
@@ -35,7 +31,6 @@
 }
 
 .card-container {
-  /* color: white; */
   font-size: 20px;
   position: absolute;
   width: fit-content;
@@ -44,4 +39,8 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+.char-details:hover {
+  width: 450px;   /* makes cards full width on hover - might break grid?? */
 }

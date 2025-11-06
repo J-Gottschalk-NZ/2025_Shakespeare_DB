@@ -1,6 +1,6 @@
 <?php
 
-function get_query($dbconnect, $sql_condition, $search_term)
+function get_query($dbconnect, $sql_condition, $params=[])
 {
 
     // s ==> shake_data table
@@ -53,23 +53,29 @@ function get_query($dbconnect, $sql_condition, $search_term)
 
     // check to see if statement fails
     if (!mysqli_stmt_prepare($stmt, $find_sql)) {
-        echo "Oops - something went wrong with your prepared statement";
+        die("Oops - something went wrong with your prepared statement");
 
     }
     
-    else {
-        // bind statement to parameters
-        mysqli_stmt_bind_param($stmt, "s", $search_term);
-        mysqli_stmt_execute($stmt);
-        $find_query = mysqli_stmt_get_result($stmt);
+    // Bind parameters if provided
+    if (!empty($params)) {
+        $types = str_repeat('s', count($params)); // all strings
+        // build array of references for bind_param
+        $refs = [];
+        foreach ($params as $key => $value) {
+            $refs[$key] = &$params[$key];
+        }
+        array_unshift($refs, $types); // prepend types
+        call_user_func_array([$stmt, 'bind_param'], $refs);
     }
 
-    // $find_query = mysqli_query($dbconnect, $find_sql);
-    $find_count = mysqli_num_rows($find_query);	
+    mysqli_stmt_execute($stmt);
+    $find_query = mysqli_stmt_get_result($stmt);
+    $find_count = mysqli_num_rows($find_query);
 
-    // returns query and number of results
-    return array($find_query, $find_count);
+    mysqli_stmt_close($stmt);
 
+    return [$find_query, $find_count];
 }
 
 function to_clean($data) {

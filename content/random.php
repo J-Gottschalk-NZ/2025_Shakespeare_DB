@@ -2,6 +2,8 @@
 
     // Wild card 'search term' to return all results so that we can choose five random results and still use a prepared statement
     $search_term = "%%";
+    $params = [$search_term];
+
 
     // Set up query
     // $sql_condition = "ORDER BY RAND() LIMIT 5";

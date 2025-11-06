@@ -219,9 +219,3 @@ footer div a:hover{
 
 }
 
-@media screen and (max-width: 1081x) {
-    .error-image {
-    margin-bottom: 20px;  /* puts space between image and text when stacked */
-  }
-
-}
