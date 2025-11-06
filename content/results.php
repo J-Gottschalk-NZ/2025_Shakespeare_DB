@@ -101,7 +101,7 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
 
     </div>  <!-- / trait tags -->
 
-    </div>  <!-- / card container -->
+    </div>  <!-- / character details -->
 
 
     <?php
