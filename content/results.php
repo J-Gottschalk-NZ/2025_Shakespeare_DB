@@ -11,6 +11,22 @@
             <?=  $heading; ?> (<?=  $find_count?> results)
         </h2>
 
+    <?php
+        // display help text if it exists...
+        if($help_text!="")
+        {
+            ?>
+            <i class="results-heading"><i class="fa-solid fa-circle-info"></i> <?= $help_text; ?></i><br><br>
+            <?php
+        }
+
+        // if we don't have help text, put in some extra white space between the sub-heading and the results.
+        else {
+            echo "<br>";
+        }
+
+    ?>
+
 <div class="cards-outer">
     
 <div class='all-cards'>

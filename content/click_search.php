@@ -1,67 +1,45 @@
-    <?php
+<?php
 
-    // retrieve search type
-    $search_type = to_clean($_REQUEST['search_type']);
-    $search_term = to_clean($_REQUEST['search_term']);
+// retrieve search type and term
+$search_type = to_clean($_REQUEST['search_type']);
+$search_term = to_clean($_REQUEST['search_term']);
 
-    // default params (one search term)
-    $params = [$search_term];
+$heading = $search_term;
+$help_text = "";
+$order = " ORDER BY s.Character_Name ASC";
 
-    $help_text = "";
+// Dictionary containing 'single' searches and columns
+$search_columns = [
+    "play"      => "Play",
+    "category"  => "Play_Cat",
+    "gender"    => "M_or_F",
+    "role"      => "Role",
+    "alignment" => "Alignment",
+    "action"    => "Action",
+    "method"    => "Method"
+];
 
-    $heading=$search_term;
-    $order = " ORDER BY s.Character_Name ASC";
+// Parameters for all the searches except 'Trait' (one term)
+$params = [$search_term];
 
-
-    if ($search_type == "play")
-    {
-    $sql_condition = "WHERE `Play` LIKE ?";    
-    }
-
-    elseif ($search_type == "category")
-    {
-    $sql_condition = "WHERE `Play_Cat` LIKE ?";    
-    }
-
-    elseif ($search_type == "gender")
-    {
-    $sql_condition = "WHERE `M_or_F` LIKE ?";    
-    }
-
-    elseif ($search_type == "role")
-    {
-    $sql_condition = "WHERE `Role` LIKE ?";    
-    }
-
-    elseif ($search_type == "alignment")
-    {
-    $sql_condition = "WHERE `Alignment` LIKE ?";    
-    }
-
-    elseif ($search_type == "action")
-    {
-    $sql_condition = "WHERE `Action` LIKE ?";    
-    }
-
-    elseif ($search_type == "method")
-    {
-    $sql_condition = "WHERE `Method` LIKE ?";    
-    }
-
-    // trait search!
-    else {
-    $sql_condition = "WHERE 
-    k1.Trait LIKE ?
-    OR k2.Trait LIKE ?
-    OR k3.Trait LIKE ?
+// Look up column based on search type (if it exists)
+if (array_key_exists($search_type, $search_columns)) {
+    $column = $search_columns[$search_type];
+    $sql_condition = "WHERE `$column` LIKE ?";
+}
+else {
+    // If it does not exist, it's a trait search...
+    $sql_condition = "
+        WHERE k1.Trait LIKE ?
+        OR k2.Trait LIKE ?
+        OR k3.Trait LIKE ?
     ";
-    $params = [$search_term, $search_term, $search_term];  // repeat for each placeholder
-    }
+    $params = [$search_term, $search_term, $search_term];
+}
 
-    // add in order by character name...
-    $sql_condition = $sql_condition.$order;
+// Add order
+$sql_condition .= $order;
 
+include("results.php");
 
-    include("results.php");
-
-    ?>
+?>
