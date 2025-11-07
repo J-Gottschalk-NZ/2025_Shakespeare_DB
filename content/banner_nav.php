@@ -50,9 +50,9 @@
         </form>     <!-- / play search -->    
 
         <!-- Character Search -->           
-        <form class="key-search" method="post" action="index.php?page=#" enctype="multipart/form-data">
+        <form class="key-search" method="post" action="index.php?page=content/quick_search" enctype="multipart/form-data">
 
-            <input class="search quicksearch" type="text" name="character_search_term" value="" required placeholder="Character">
+            <input class="search quicksearch" type="text" name="quick_search_term" value="" required placeholder="Character">
 
             <button type="submit" class="submit" name="character_search">
                 <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 
@@ -61,9 +61,9 @@
         </form>     <!-- / character search -->    
 
         <!-- Death Search -->           
-        <form class="key-search" method="post" action="index.php?page=#" enctype="multipart/form-data">
+        <form class="key-search" method="post" action="index.php?page=content/quick_search" enctype="multipart/form-data">
 
-            <input class="search quicksearch" type="text" name="death_search_term" value="" required placeholder="Death">
+            <input class="search quicksearch" type="text" name="quick_search_term" value="" required placeholder="Death">
 
             <button type="submit" class="submit" name="death_search">
                 <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 

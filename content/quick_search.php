@@ -6,15 +6,22 @@
 
 
     // retrieve search type and search term...
+
+    $search_type_array = [
+            "quick_search"  => "quick",
+            "play_search" => "play",
+            "character_search" => "character",
+            "death_search" => "death"
+    ];
+
+    // Loop through the array to detect which submit button was pressed
+    foreach ($search_type_array as $submit_name => $type_value) {
+        if (isset($_POST[$submit_name])) {
+            $search_type = $type_value;
+            break;
+        }
+    }
     
-    if(isset($_POST['quick_search'])) {
-        $search_type = 'quick';
-    }
-
-    elseif(isset($_POST['play_search'])) {
-    $search_type = 'play';
-    }
-
     $search_term = $_REQUEST['quick_search_term'];
 
 
@@ -28,7 +35,7 @@
     // Dictionary containing 'single' searches and columns
     $search_columns = [
     "play"      => "Play",
-    "category"  => "Play_Cat",
+    "character"  => "Character_Name",
     ];
 
 // Query for play / character (single column)
@@ -52,7 +59,18 @@ elseif ($search_type == "quick")
     $params = [$search_term, $search_term, $search_term, $search_term];
 
     $help_text = "Results are based on play name, character name and cause of death.";
+}
 
+// Cause of death (method and action)
+else {
+        $sql_condition = "
+    WHERE `Method` LIKE ?
+    OR `Action` LIKE ?
+    "; 
+
+    $params = [$search_term, $search_term];
+
+    $help_text = "Results are based on how the character died - action (generic) and method (specific).";
 }
 
     // Add order
