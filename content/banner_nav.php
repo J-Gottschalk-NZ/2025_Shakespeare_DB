@@ -28,7 +28,7 @@
       <div class="nav-items">
 
         <!-- Quick Search -->           
-        <form class="key-search" method="post" action="index.php?page=#" enctype="multipart/form-data">
+        <form class="key-search" method="post" action="index.php?page=content/quick_search" enctype="multipart/form-data">
 
             <input class="search quicksearch" type="text" name="quick_search_term" value="" required placeholder="Quick">
 
