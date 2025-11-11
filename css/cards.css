@@ -35,10 +35,9 @@ font-size: 24pt;
 
     background-color: #cba7cf;
     padding-left: 20px;
-    padding-bottom: 0;
 
     font-size: 18pt;
-    height: 45px;
+    height: 60px;
 
 }
 
@@ -47,7 +46,7 @@ a.play, a.trait{
 }
 
 /* Set category icon to 50px */
-.play-title a img {
+.play-title a img, .icon {
     border: 1px solid #5E3163;
     padding: 5px;
     border-radius: 10px;
@@ -56,9 +55,10 @@ a.play, a.trait{
     background-color: #cba7cf;
 }
 
-.play-title a img:hover {
+.play-title a img:hover, .icon:hover {
     border: 1px solid #000;
     background-color: #FCC272;
+
 }
 
 

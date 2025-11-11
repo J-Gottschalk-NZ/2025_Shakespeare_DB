@@ -1,5 +1,5 @@
 <div class="footer-left-text">
-            <a href="#">Icon Legends</a>
+            <a href="index?page=content/icons">Icon Legends</a>
             <a href="#">Credits</a>
 
         </div>      <!-- left footer -->

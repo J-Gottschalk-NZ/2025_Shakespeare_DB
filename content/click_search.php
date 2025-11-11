@@ -34,7 +34,7 @@ else {
         OR k2.Trait LIKE ?
         OR k3.Trait LIKE ?
     ";
-    $params = [$search_term, $search_term, $search_term];
+    $params = array_fill(0, 3, $search_term);
 }
 
 // Add order

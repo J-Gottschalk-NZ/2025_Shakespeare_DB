@@ -53,12 +53,16 @@ elseif ($search_type == "quick")
     WHERE `Play` LIKE ?
     OR `Method` LIKE ?
     OR `Action` LIKE ?
-    OR `Character_Name` LIKE ?        
+    OR `Character_Name` LIKE ?    
+    OR k1.Trait LIKE ?
+    OR k2.Trait LIKE ?
+    OR k3.Trait LIKE ?    
     "; 
 
-    $params = [$search_term, $search_term, $search_term, $search_term];
+    // creates an array with seven terms
+    $params = array_fill(0, 7, $search_term);
 
-    $help_text = "Results are based on play name, character name and cause of death.";
+    $help_text = "Results are based on play name, character name, cause of death and key trait/s.";
 }
 
 // Cause of death (method and action)

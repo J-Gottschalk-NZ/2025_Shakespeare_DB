@@ -7,8 +7,8 @@
 
 .featured-image {
   display: block;
-  width: 325px;
-  height: auto;
+  width: auto;
+  height: 325px;
   border-radius: 5px;
 }
 

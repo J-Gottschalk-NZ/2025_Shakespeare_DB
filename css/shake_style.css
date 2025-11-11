@@ -100,6 +100,7 @@ h2 {
 
 h2.search-heading {
   font-size: 250%;
+  margin-bottom: auto;
 }
 
 .no-results-message {
@@ -185,6 +186,41 @@ footer div a:hover{
 }
 
 
+/* Icon Page styling... */
+
+a.legend {
+  text-decoration: none;
+  color: #5e3163;
+  font-size: 125%;
+  padding: 5px;
+}
+
+.icon-list {
+  display: grid;
+  padding: 10px;
+  border-radius: 5px;
+  color: #000;
+  font-size: 150%;
+  background-color: #fff;
+}
+
+/* Vertically aligns icon and image (which are inside the a tag) */
+.legend {
+  display: flex;
+  align-items: center;
+}
+
+.legend:hover {
+  background-color: #FCD495;
+}
+
+.icon-list .row:nth-child(odd) {
+  background-color: #dedede; /* Light gray for odd rows */
+}
+
+.icon-list .row:nth-child(even) {
+  background-color: #fff; /* White for even rows */
+}
 
 @media screen and (max-width: 1380px) {
   

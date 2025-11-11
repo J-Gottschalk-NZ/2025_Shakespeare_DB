@@ -20,61 +20,46 @@
         <a href="#" class="nav-button" title="Filter results based play, role etc" onclick="openNav()">
         <i class="fa-solid fa-filter"></i></a>      
 
-    <div class="nav-combo">
-      <div class="hamburger">
-      <i class="fa-solid fa-search" onclick="changeIcon(this)"></i>
-      </div>
+        <div class="nav-combo">
+            <div class="hamburger">
+            <i class="fa-solid fa-search" onclick="changeIcon(this)"></i>
+            </div>
 
-      <div class="nav-items">
+            <div class="nav-items">
 
-        <!-- Quick Search -->           
-        <form class="key-search" method="post" action="index.php?page=content/quick_search" enctype="multipart/form-data">
 
-            <input class="search quicksearch" type="text" name="quick_search_term" value="" required placeholder="Quick">
+            <!-- Loop to create four quick search boxes -->
+            <?php
+            $quick_searches = [
+                'quick_search'     => 'Quick',
+                'play_search'      => 'Play',
+                'character_search' => 'Character',
+                'death_search'     => 'Death'
+            ];
 
-            <button type="submit" class="submit" name="quick_search">
-            <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 
-            </button>
+            foreach ($quick_searches as $name => $placeholder) : ?>
+                
+                <form class="key-search" method="post" action="index.php?page=content/quick_search" enctype="multipart/form-data">
+                    
+                <input class="search quicksearch" 
+                        type="text" 
+                        name="quick_search_term" 
+                        value="" 
+                        required 
+                        placeholder="<?= $placeholder; ?>">
 
-        </form>     <!-- / quick search -->   
+                <button type="submit" class="submit" name="<?= $name; ?>">
+                    <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i>
+                </button>
+                </form>
 
-         <!-- Play Search -->           
-        <form class="key-search" method="post" action="index.php?page=content/quick_search" enctype="multipart/form-data">
+            <?php endforeach; ?>
 
-            <input class="search quicksearch" type="text" name="quick_search_term" value="" required placeholder="Play">
 
-            <button type="submit" class="submit" name="play_search">
-                <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 
-            </button>
+            </div>  <!-- / nav-items -->
 
-        </form>     <!-- / play search -->    
 
-        <!-- Character Search -->           
-        <form class="key-search" method="post" action="index.php?page=content/quick_search" enctype="multipart/form-data">
-
-            <input class="search quicksearch" type="text" name="quick_search_term" value="" required placeholder="Character">
-
-            <button type="submit" class="submit" name="character_search">
-                <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 
-            </button>
-
-        </form>     <!-- / character search -->    
-
-        <!-- Death Search -->           
-        <form class="key-search" method="post" action="index.php?page=content/quick_search" enctype="multipart/form-data">
-
-            <input class="search quicksearch" type="text" name="quick_search_term" value="" required placeholder="Death">
-
-            <button type="submit" class="submit" name="death_search">
-                <i class="fa-solid fa-magnifying-glass fa-flip-horizontal"></i> 
-            </button>
-
-        </form>     <!-- / character search -->   
-
-</div>  <!-- / nav-combo -->
-
-      
-    </div>    <!-- /  nav items -->
+        </div>    <!-- /  nav combo -->
 
 
     </nav>
