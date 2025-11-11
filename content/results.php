@@ -88,10 +88,10 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
     $all_icons = [
 
         [$gender, $click_type."gender".$click_term.$gender, $gender_icon],
-        [$role, $click_type."role".$click_term.$role, $role_icon],
-        [$alignment, $click_type."alignment".$click_term.$alignment, $alignment_icon],
-        [$action, $click_type."action".$click_term.$action, $action_icon],
-        [$method, $click_type."method".$click_term.$method, $method_icon]
+        [$role, $click_type."ms_role".$click_term.$role, $role_icon],
+        [$alignment, $click_type."moral_alignment".$click_term.$alignment, $alignment_icon],
+        [$action, $click_type."cod_action".$click_term.$action, $action_icon],
+        [$method, $click_type."cod_method".$click_term.$method, $method_icon]
 
     ];
 

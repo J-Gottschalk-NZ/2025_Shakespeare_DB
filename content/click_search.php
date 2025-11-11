@@ -13,10 +13,10 @@ $search_columns = [
     "play"      => "Play",
     "category"  => "Play_Cat",
     "gender"    => "M_or_F",
-    "role"      => "Role",
-    "alignment" => "Alignment",
-    "action"    => "Action",
-    "method"    => "Method"
+    "ms_role"      => "Role",
+    "moral_alignment" => "Alignment",
+    "cod_action"    => "Action",
+    "cod_method"    => "Method"
 ];
 
 // Parameters for all the searches except 'Trait' (one term)

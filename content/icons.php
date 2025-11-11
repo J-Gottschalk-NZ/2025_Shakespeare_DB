@@ -1,115 +1,71 @@
 <h2>Icons</h2>
 <i class="fa-solid fa-circle-info"></i> Click on any of the icons below to see characters with that feature / characteristic.
 
+<br><br>
+
 <?php
 
+// URL helpers
+$click_type = "index.php?page=content/click_search&search_type=";
+$click_term = "&search_term=";
 
-    // URL helpers
-    $click_type = "index.php?page=content/click_search&search_type=";
-    $click_term = "&search_term=";
+// CONFIG ARRAY
+// table = DB table name
+// label_field = column for visible text
+// icon_field = column for icon filename
+$icon_sets = [
 
-    // retrieve data...
-    $category_sql = "SELECT * FROM `category` ORDER BY `category`.`Play_Cat` ASC ";
-    $category_query = mysqli_query($dbconnect, $category_sql);
+    ["heading" =>"Gender", "table" => "gender", "label_field" => "M_or_F", "icon_field" => "Gender_Icon"],
 
-    $gender_sql = "SELECT * FROM `gender` ORDER BY `gender`.`M_or_F` ASC ";
-    $gender_query = mysqli_query($dbconnect, $gender_sql);
+    ["heading" => "Category","table" => "category", "label_field" => "Play_Cat", "icon_field" => "Category_Icon"],
+
+
+    ["heading" =>"Role", "table" => "ms_role", "label_field" => "Role", "icon_field" => "Role_Icon"],
+    ["heading" =>"Moral Alignment", "table" => "moral_alignment", "label_field" => "Alignment", "icon_field" => "Moral_Icon"],
+
+    ["heading" =>"Method of Death", "table" => "cod_method", "label_field" => "Method", "icon_field" => "Method_Icon"],
+    ["heading" =>"Cause of Death", "table" => "cod_action", "label_field" => "Action", "icon_field" => "Action_Icon"]
+
+];
 
 ?>
 
 <div class='all-cards'>
 
-<!-- Start of Category box -->
+<?php
+foreach ($icon_sets as $set) {
 
-<div class="icon-list">
-    <div class="character-name">Category</div>
+    // Make heading from table name (Category, Gender, etc.)
+    $display_name = ($set['heading']);
 
-    <?php
+    // Query data
+    $sql = "SELECT * FROM `{$set['table']}` ORDER BY `{$set['table']}`.`{$set['label_field']}` ASC";
+    $query = mysqli_query($dbconnect, $sql);
 
+    echo "<div class='icon-list'>";
+    echo "<div class='character-name'>{$display_name}</div>";
 
+    while($rs = mysqli_fetch_assoc($query)) {
 
-    while($category_rs = mysqli_fetch_assoc($category_query)) {
+        $label = $rs[$set['label_field']];
+        $icon_path = "images/icons/" . $rs[$set['icon_field']];
 
-    ?>
-    
-    <div class="row">
+        echo "
+        <div class='row'>
+            <a 
+                title='{$label}'
+                class='legend'
+                href='{$click_type}{$set['table']}{$click_term}{$label}'
+                alt='{$label}'
+            >
+                <img class='icon' src='{$icon_path}'>
+                {$label}
+            </a>
+        </div>";
+    }
 
-    <?php
-        
-    $category = $category_rs['Play_Cat'];
-    $category_icon = "images/icons/".$category_rs['Category_Icon'];
+    echo "</div> <!-- / icon-list -->";
+}
+?>
 
-        ?>
-
-        <a 
-        title="<?=  $category; ?>" 
-        class="legend" 
-        href="<?=  $click_type?>category<?=  $click_term.$category; ?>"
-         alt="<?=  $category; ?>">
-         <img class="icon" src="<?= $category_icon ?>">
-         <?= $category ?>
-     </a>
-
-
-    </div>  <!-- / row --> 
- 
-    <?php
-
-    } // end category while
-
-
-    ?>
-
-
-    </div>  <!-- / icon list -->
-
-
-
-<!-- starg gender -->
-<div class="icon-list">
-    <div class="character-name">Gender</div>
-
-    <?php
-
-    while($gender_rs = mysqli_fetch_assoc($gender_query)) {
-
-    ?>
-    
-    <div class="row">
-
-    <?php
-        
-    $gender = $gender_rs['M_or_F'];
-    $gender_icon = "images/icons/".$gender_rs['Gender_Icon'];
-
-
-
-        ?>
-
-        <a 
-        title="<?=  $gender; ?>" 
-        class="legend" 
-        href="<?=  $click_type?>gender<?=  $click_term.$gender; ?>"
-         alt="<?=  $gender; ?>">
-         <img class="icon" src="<?= $gender_icon ?>">
-         <?= $gender ?>
-     </a>
-
-
-    </div>  <!-- / row --> 
- 
-    <?php
-
-    } // end gender while
-
-
-    ?>
-
-
-    </div>  <!-- / icon list -->
-<!-- end gender -->
-
-
-</div>
-
-</div>
+</div> <!-- / all-cards -->

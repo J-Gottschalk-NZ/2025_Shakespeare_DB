@@ -222,6 +222,11 @@ a.legend {
   background-color: #fff; /* White for even rows */
 }
 
+.row {
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (max-width: 1380px) {
   
   .nav-items {
