@@ -75,3 +75,30 @@ font-family: "Libre Baskerville", serif;
 .advanced-search:hover{
     color: #fcd495;
 }
+
+/* Admin Form styling... */
+.admin-form {
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Add & Edit form styling */
+
+.big-form {
+    max-width: 1000px;
+margin: auto;}
+
+.large-submit{
+    font-size: 150%;
+    
+    left:-5px;
+    background-color: #cba7cf; 
+    color:#000000;
+    border: 1px solid #000;
+    border-radius: 5px;   
+
+}
+
+.large-submit:hover {
+    background-color:#fcd495;
+}

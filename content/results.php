@@ -117,6 +117,23 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
 
     </div>  <!-- / trait tags -->
 
+
+    <?php
+            // if user is logged in, show edit / delete options
+        if (isset($_SESSION['admin']))  {
+
+            ?>
+            <div class="tools">
+                <a class="nav-button" href="#"><i class="fa-solid fa-pen-nib"></i></a> &nbsp; &nbsp;
+                <a class="nav-button" href="#"><i class="fa-solid fa-trash"></i></a>
+            </div>
+            <?php
+        }
+
+        ?>
+
+
+
     </div>  <!-- / character details -->
 
 

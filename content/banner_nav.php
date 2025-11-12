@@ -65,8 +65,31 @@
     </nav>
 
     <div class="log-in-out">
-            <!-- Log in / logout button -->
-            <a class="nav-button" href="#"><i class="fa-solid fa-right-to-bracket"></i></a> 
+
+        <?php
+        if(isset($_SESSION['admin'])) {
+
+            ?>
+
+            <a class="nav-button" href="index.php?page=admin/add_entry">
+            <i class="fa-solid fa-plus"></i></a>
+            &nbsp; &nbsp;
+            <a class="nav-button" href="index.php?logout=1">
+            <i class="fa-solid fa-right-to-bracket fa-flip-horizontal"></i></a>
+
+            <?php
+
+        } // end admin if
+
+    else {
+
+        ?>
+            <a class="nav-button" href="index.php?page=admin/login">
+            <i class="fa-solid fa-right-to-bracket"></i></a>
+        <?php
+
+    } // end login else
+    ?>
 
 
     </div>  <!-- / log-in-out -->

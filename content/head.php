@@ -9,6 +9,7 @@
     <!-- Link to make font Awesome work -->
     <script src="https://kit.fontawesome.com/37c3bd2981.js" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" type="text/css" href="css/auto_complete.css">
     <link rel="stylesheet" type="text/css" href="css/shake_style.css">
     <link rel="stylesheet" href="css/side_panel.css">
     <link rel="stylesheet" href="css/forms.css">

@@ -227,6 +227,20 @@ a.legend {
   align-items: center;
 }
 
+.tools {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  background-color: #dedede;
+  border-radius: 5px;
+}
+
+/* decrease spacing between delete / edit button */
+.tools a.nav-button {
+  margin-right: 0;
+}
+
+
 @media screen and (max-width: 1380px) {
   
   .nav-items {

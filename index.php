@@ -13,6 +13,26 @@
         exit;
     }
 
+    // use ob_start to buffer content so that we can use header(Location:foo) to redirect users to a given page
+    ob_start();
+    session_start();
+
+    // need this so that we don't get header issues when users try to log in.
+    if (isset($_REQUEST['login'])) {
+    include("admin/adminlogin.php");
+    exit;
+    }
+
+    // logs users out if logout button is pressed.
+    if (isset($_GET['logout'])) {
+    session_unset(); 
+    session_destroy(); 
+    header("Location: index.php?page=admin/login");
+    exit;
+    }
+
+
+
 ?>
 
 <html lang="en">
@@ -30,6 +50,7 @@
     <?php include("content/banner_nav.php"); ?>
 
     <main class="common">
+
 
     <?php
     
@@ -58,3 +79,8 @@
 
   </body>
 </html>
+
+<?php
+// Flush and end output buffering at the very end (part of making our header(Location:foo) code work correctly)
+ob_end_flush();
+?>
