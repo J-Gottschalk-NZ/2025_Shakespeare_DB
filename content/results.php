@@ -5,6 +5,8 @@
     if($find_count > 0)
 
     {
+
+        if($heading != "") {
     ?>
 
         <h2 class="search-heading">
@@ -12,6 +14,9 @@
         </h2>
 
     <?php
+
+        }   // end non-blank heading if
+
         // display help text if it exists...
         if($help_text!="")
         {
@@ -38,6 +43,8 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
 
     // Search term / Text setup (retrieve text and save as variables for easy reference)
     // This is mostly to make searching / clickable links easy
+    $ID = $find_rs['ID'];
+    
     $character = $find_rs['Character_Name'];
     $play = $find_rs['Play'];
     $category = $find_rs['Play_Cat'];
@@ -47,9 +54,11 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
     $action = $find_rs['Action'];    
     $method = $find_rs['Method'];    
 
-    $triat1 = $find_rs['Trait1'];
-    $triat2 = $find_rs['Trait2'];
-    $triat3 = $find_rs['Trait3'];
+    $trait1 = $find_rs['Trait1'];
+    $trait2 = $find_rs['Trait2'];
+    $trait3 = $find_rs['Trait3'];
+
+    $featured = $find_rs['Featured'];
 
     // Image and icon set up...
     $category_icon = "images/icons/".$find_rs['Category_Icon'];
@@ -110,10 +119,28 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
     <?=  $find_rs['Description']; ?>
     </div>
 
+
     <div class="trait-tags">
-        <a href="<?=  $click_type?>trait<?=  $click_term.$triat1; ?>" class="trait"><?=  $triat1; ?></a>
-        <a href="<?=  $click_type?>trait<?=  $click_term.$triat2; ?>" class="trait"><?=  $triat2; ?></a>
-        <a href="<?=  $click_type?>trait<?=  $click_term.$triat3; ?>" class="trait"><?=  $triat3; ?></a>
+
+    <?php
+    
+    $all_traits = [$trait1, $trait2, $trait3];
+    
+    // iterate through list of traits and output them (if they are not n/a)
+    foreach ($all_traits as $trait) {
+        if($trait != "n/a") {
+
+            ?>
+            
+            <a href="<?=  $click_type?>trait<?=  $click_term.$trait; ?>" class="trait"><?=  $trait; ?></a>
+
+            <?php
+
+        }   // end if not n/a
+
+    } // end trait foreach
+
+    ?>
 
     </div>  <!-- / trait tags -->
 
@@ -124,8 +151,29 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
 
             ?>
             <div class="tools">
-                <a class="nav-button" href="#"><i class="fa-solid fa-pen-nib"></i></a> &nbsp; &nbsp;
-                <a class="nav-button" href="#"><i class="fa-solid fa-trash"></i></a>
+                <a class="nav-button" href="index.php?page=admin/edit&ID=<?= $ID; ?>"><i class="fa-solid fa-pen-nib"></i></a> &nbsp; &nbsp;
+
+                <?php
+                // only display 'delete' icon if the character is not a featured character.
+
+                if($featured == "") {
+
+                    ?>
+                    <a class="nav-button" href="index.php?page=admin/delete_confirm&ID=<?= $ID; ?>"><i class="fa-solid fa-trash"></i></a>
+                    <?php
+
+                }   // end of featured if
+
+                    else{
+                        ?>
+                        <a title="Featured item (can't be deleted)" class="nav-button grey-button" href="#"><i class="fa-solid fa-trash"></i></a>
+
+                        <?php
+                    }   // end of featured else     
+
+                ?>
+
+
             </div>
             <?php
         }

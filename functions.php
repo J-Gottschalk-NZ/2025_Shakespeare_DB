@@ -119,4 +119,23 @@ return $all_items;
 }
 
 
+// get search ID
+function get_search_ID($dbconnect, $search_term)
+{
+	$find_sql = "SELECT * FROM key_traits WHERE Trait LIKE '$search_term'";
+	$find_query = mysqli_query($dbconnect, $find_sql);
+	$find_rs = mysqli_fetch_assoc($find_query);
+
+	// count results
+	$find_count = mysqli_num_rows($find_query);
+
+	if($find_count == 1) {
+	return $find_rs['TraitID'];
+	}
+	else {
+		return "no results";
+	}
+}
+
+
 ?>

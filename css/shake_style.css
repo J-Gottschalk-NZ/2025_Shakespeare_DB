@@ -90,6 +90,14 @@ footer{
     justify-content: center;
 }
 
+.msg-image{
+  display: block;   /* allows image to be centered correctly*/
+  width: 250px;
+  margin: auto;
+  padding: 10px;
+
+}
+
 h1 {
   font-size: 300%;
 }
@@ -103,13 +111,18 @@ h2.search-heading {
   margin-bottom: auto;
 }
 
-.no-results-message {
-
+/*  wrapper to hold cards and message used on confirm delete page for example. */
+.single-holder, .no-results-message {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  align-items: stretch;
+  justify-content: start;
+  column-gap: 10px;
 }
+
+.single-holder > * {
+  max-width: 450px;       /* ensures cards/messages never exceed 450px */
+}
+
+
 
 .error-image
 {
@@ -147,6 +160,10 @@ a.nav-button:link, a.nav-button:visited {
 a.nav-button:hover {
      background-color: #FCD495;
    
+}
+
+a.grey-button:link, a.grey-button:hover, a.grey-button:visited {
+  background-color: #c6c6c6;
 }
 
 /* Hamburger css */

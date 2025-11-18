@@ -4,6 +4,7 @@
   position: relative;
   display: inline-block;
 width: 100%;
+color: #000;
 }
 
 .autocomplete-items {
@@ -32,6 +33,6 @@ width: 100%;
 
 /*when navigating through the items using the arrow keys:*/
 .autocomplete-active {
-  background-color: DodgerBlue !important; 
+  background-color: #8e6593 !important; 
   color: #ffffff; 
 }

@@ -6,8 +6,9 @@
     grid-template-columns: repeat(auto-fit, 450px);
     gap: 40px;
 
-    justify-content: center;
-    align-items: flex-start;
+    /* justify-content: center; */
+    /* align-items: flex-start; */
+    align-content: start;
 }
 
 .char-details{
@@ -128,3 +129,13 @@ a.play, a.trait{
     font-weight: bold;
 }
 
+.delete-tags a{
+    background-color: #fff;
+    color: #660000;
+    border: 2px solid #660000;
+}
+
+.delete-tags a:hover{
+    color: #fff;
+    background-color: #660000;   
+}
