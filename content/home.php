@@ -33,9 +33,14 @@
 
     while($find_rs = mysqli_fetch_assoc($find_query)) {
 
+    $avatar = "images/avatars/".$find_rs['Featured'];
+
+
 
     // Search term / Text setup (retrieve text and save as variables for easy reference)
     // This is mostly to make searching / clickable links easy
+    $ID = $find_rs['ID'];
+    
     $character = $find_rs['Character_Name'];
     $play = $find_rs['Play'];
     $category = $find_rs['Play_Cat'];
@@ -45,9 +50,11 @@
     $action = $find_rs['Action'];    
     $method = $find_rs['Method'];    
 
-    $triat1 = $find_rs['Trait1'];
-    $triat2 = $find_rs['Trait2'];
-    $triat3 = $find_rs['Trait3'];
+    $trait1 = $find_rs['Trait1'];
+    $trait2 = $find_rs['Trait2'];
+    $trait3 = $find_rs['Trait3'];
+
+    $featured = $find_rs['Featured'];
 
     // Image and icon set up...
     $category_icon = "images/icons/".$find_rs['Category_Icon'];
@@ -57,11 +64,10 @@
     $action_icon = "images/icons/".$find_rs['Action_Icon'];
     $method_icon = "images/icons/".$find_rs['Method_Icon'];
 
-    $avatar = "images/avatars/".$find_rs['Featured'];
-
     // URL helpers
     $click_type = "index.php?page=content/click_search&search_type=";
     $click_term = "&search_term=";
+
 
     ?>
 
@@ -73,7 +79,8 @@
 
     <div class="overlay">
 
-    <div class="char-details">
+    
+<div class="char-details">
 
     <div class="character-name"><?=  $character; ?></div>
 
@@ -93,10 +100,10 @@
     $all_icons = [
 
         [$gender, $click_type."gender".$click_term.$gender, $gender_icon],
-        [$role, $click_type."role".$click_term.$role, $role_icon],
-        [$alignment, $click_type."alignment".$click_term.$alignment, $alignment_icon],
-        [$action, $click_type."action".$click_term.$action, $action_icon],
-        [$method, $click_type."method".$click_term.$method, $method_icon]
+        [$role, $click_type."ms_role".$click_term.$role, $role_icon],
+        [$alignment, $click_type."moral_alignment".$click_term.$alignment, $alignment_icon],
+        [$action, $click_type."cod_action".$click_term.$action, $action_icon],
+        [$method, $click_type."cod_method".$click_term.$method, $method_icon]
 
     ];
 
@@ -115,12 +122,68 @@
     <?=  $find_rs['Description']; ?>
     </div>
 
+
     <div class="trait-tags">
-        <a href="<?=  $click_type?>trait<?=  $click_term.$triat1; ?>" class="trait"><?=  $triat1; ?></a>
-        <a href="<?=  $click_type?>trait<?=  $click_term.$triat2; ?>" class="trait"><?=  $triat2; ?></a>
-        <a href="<?=  $click_type?>trait<?=  $click_term.$triat3; ?>" class="trait"><?=  $triat3; ?></a>
+
+    <?php
+    
+    $all_traits = [$trait1, $trait2, $trait3];
+    
+    // iterate through list of traits and output them (if they are not n/a)
+    foreach ($all_traits as $trait) {
+        if($trait != "n/a") {
+
+            ?>
+            
+            <a href="<?=  $click_type?>trait<?=  $click_term.$trait; ?>" class="trait"><?=  $trait; ?></a>
+
+            <?php
+
+        }   // end if not n/a
+
+    } // end trait foreach
+
+    ?>
 
     </div>  <!-- / trait tags -->
+
+
+    <?php
+            // if user is logged in, show edit / delete options
+        if (isset($_SESSION['admin']))  {
+
+            ?>
+            <div class="tools">
+                <a class="nav-button" href="index.php?page=admin/edit&ID=<?= $ID; ?>"><i class="fa-solid fa-pen-nib"></i></a> &nbsp; &nbsp;
+
+                <?php
+                // only display 'delete' icon if the character is not a featured character.
+
+                if($featured == "") {
+
+                    ?>
+                    <a class="nav-button" href="index.php?page=admin/delete_confirm&ID=<?= $ID; ?>"><i class="fa-solid fa-trash"></i></a>
+                    <?php
+
+                }   // end of featured if
+
+                    else{
+                        ?>
+                        <a title="Featured item (can't be deleted)" class="nav-button grey-button" href="#"><i class="fa-solid fa-trash"></i></a>
+
+                        <?php
+                    }   // end of featured else     
+
+                ?>
+
+
+            </div>
+            <?php
+        }
+
+        ?>
+
+
 
     </div>  <!-- / character details -->
 

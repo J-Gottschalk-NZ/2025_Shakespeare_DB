@@ -1,6 +1,6 @@
 <?php
 
-function get_query($dbconnect, $sql_condition, $params=[])
+function get_query($dbconnect, $sql_condition, $params = [])
 {
 
     // s ==> shake_data table
@@ -13,70 +13,73 @@ function get_query($dbconnect, $sql_condition, $params=[])
 	// r ==> role
 	// p ==> play_name
 
-    $find_sql = "SELECT 
-    s.*,
-    p.*,
-    r.*,
-    g.*,
-    c.*,
-    ma.*,
-    a.*,
-    m.*,
-    
-    -- 'Trait' is the COLUMN name with the 'word'
-    k1.Trait AS Trait1,
-    k2.Trait AS Trait2,
-    k3.Trait AS Trait3
-    
-	FROM shake_data s
+    $find_sql = "
+        SELECT 
+            s.*,
+            p.*,
+            r.*,
+            g.*,
+            c.*,
+            ma.*,
+            a.*,
+            m.*,
 
-    JOIN play_name p ON p.PlayID = s.PlayID
-    JOIN ms_role r ON r.RoleID = s.RoleID
-    JOIN gender g ON g.GenderID = s.GenderID
-    JOIN category c ON c.CategoryID = p.CategoryID
-    JOIN moral_alignment ma ON ma.Moral_AlignmentID = s.Moral_AlignmentID
-    JOIN key_traits k1 ON s.Trait_1ID = k1.TraitID
-    JOIN key_traits k2 ON s.Trait_2ID = k2.TraitID
-    JOIN key_traits k3 ON s.Trait_3ID = k3.TraitID
-    JOIN cod_action a ON s.COD_ActionID = a.COD_ActionID
-    JOIN cod_method m ON s.COD_MethodID = m.COD_MethodID 
+            -- 'Trait' is the COLUMN name with the 'word'
+            k1.Trait AS Trait1,
+            k2.Trait AS Trait2,
+            k3.Trait AS Trait3
 
-	"
-    ;
+        FROM shake_data s
 
-	
+        JOIN play_name p ON p.PlayID = s.PlayID
+        JOIN ms_role r ON r.RoleID = s.RoleID
+        JOIN gender g ON g.GenderID = s.GenderID
+        JOIN category c ON c.CategoryID = p.CategoryID
+        JOIN moral_alignment ma ON ma.Moral_AlignmentID = s.Moral_AlignmentID
+        JOIN key_traits k1 ON s.Trait_1ID = k1.TraitID
+        JOIN key_traits k2 ON s.Trait_2ID = k2.TraitID
+        JOIN key_traits k3 ON s.Trait_3ID = k3.TraitID
+        JOIN cod_action a ON s.COD_ActionID = a.COD_ActionID
+        JOIN cod_method m ON s.COD_MethodID = m.COD_MethodID
+        
+        -- Adds additional sql condition
+        $sql_condition
+    ";
 
-    // Add where / random / recent condition
-	$find_sql .= $sql_condition;
-
-    $stmt = mysqli_stmt_init($dbconnect);
-
-    // check to see if statement fails
-    if (!mysqli_stmt_prepare($stmt, $find_sql)) {
-        die("Oops - something went wrong with your prepared statement");
-
+    // Prepare statement (OO-style)
+    $stmt = $dbconnect->prepare($find_sql);
+    if (!$stmt) {
+        die("Prepare failed: " . $dbconnect->error);
     }
-    
+
     // Bind parameters if provided
     if (!empty($params)) {
-        $types = str_repeat('s', count($params)); // all strings
-        // build array of references for bind_param
-        $refs = [];
+        $types = str_repeat('s', count($params));  // all params treated as strings
+
+        // bind_param requires references
+        $bind_values = [];
         foreach ($params as $key => $value) {
-            $refs[$key] = &$params[$key];
+            $bind_values[$key] = &$params[$key];
         }
-        array_unshift($refs, $types); // prepend types
-        call_user_func_array([$stmt, 'bind_param'], $refs);
+
+        array_unshift($bind_values, $types);
+
+        call_user_func_array([$stmt, 'bind_param'], $bind_values);
     }
 
-    mysqli_stmt_execute($stmt);
-    $find_query = mysqli_stmt_get_result($stmt);
-    $find_count = mysqli_num_rows($find_query);
+    // Execute
+    $stmt->execute();
 
-    mysqli_stmt_close($stmt);
+    // Get result
+    $find_query = $stmt->get_result();
+    $find_count = $find_query->num_rows;
+
+    // Close statement
+    $stmt->close();
 
     return [$find_query, $find_count];
 }
+
 
 function to_clean($data) {
 	$data = trim($data);	
