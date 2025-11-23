@@ -1,6 +1,14 @@
 <?php // retrieve data
     list($find_query, $find_count) = get_query($dbconnect, $sql_condition, $params);
 
+    // set up heading for single / multiple results
+    if($find_count == 1) {
+        $results_heading = $heading;
+    }
+
+    else {
+        $results_heading = $heading." (".$find_count." results)";
+    }
 
     if($find_count > 0)
 
@@ -10,7 +18,7 @@
     ?>
 
         <h2 class="search-heading">
-            <?=  $heading; ?> (<?=  $find_count?> results)
+            <?= htmlspecialchars($results_heading); ?>
         </h2>
 
     <?php
@@ -86,8 +94,9 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
         href="<?=  $click_type?>category<?=  $click_term.$category; ?>">
             <img src="<?=  $category_icon; ?>" alt="<?=  $category; ?>">
         </a>
-        <a class="play" href="index.php?page=content/click_search&search_type=play&search_term=<?=  $play; ?>"><?=  $play; ?></a>
-    </div>
+        <a class="play" 
+        href="index.php?page=content/click_search&search_type=play&search_term=<?=  urlencode($play); ?>">
+        <?=  $play; ?></a>    </div>
 
     <?php
 

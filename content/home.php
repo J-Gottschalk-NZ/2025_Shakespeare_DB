@@ -89,7 +89,9 @@
         href="<?=  $click_type?>category<?=  $click_term.$category; ?>">
             <img src="<?=  $category_icon; ?>" alt="<?=  $category; ?>">
         </a>
-        <a class="play" href="index.php?page=content/click_search&search_type=play&search_term=<?=  $play; ?>"><?=  $play; ?></a>
+        <a class="play" 
+        href="index.php?page=content/click_search&search_type=play&search_term=<?=  urlencode($play); ?>">
+        <?=  $play; ?></a>
     </div>
 
     <?php

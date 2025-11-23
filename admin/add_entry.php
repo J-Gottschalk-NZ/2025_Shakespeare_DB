@@ -69,7 +69,7 @@ $trait_1_ID = $trait_2_ID = $trait_3_ID = 0;
             <input name="Trait3" id="Trait3" placeholder="Trait 3" />
         </div>
 
-        <br /><br />
+    <br /><br />
 
 
 
@@ -100,6 +100,5 @@ $trait_1_ID = $trait_2_ID = $trait_3_ID = 0;
         header("Location: index.php?page=admin/login&error=$login_error");
     }
 
-    ob_end_flush();
 
 ?>

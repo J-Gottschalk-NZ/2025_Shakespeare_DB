@@ -139,6 +139,27 @@ h2.search-heading {
   border-radius: 10px;
 }
 
+.all-credits{
+  display: flex;
+  justify-content: start;
+  column-gap: 30px;
+}
+
+a.credits{
+  color: #cba7cf;
+  font-weight: bold;
+}
+
+a.credits:visited{
+  color: #c6c6c6;
+}
+
+/* Remember to put hover rule after link / visited! */
+a.credits:hover{
+  color: #FCD495;
+}
+
+
 /* Navigation Styling */
 a.nav-button{
     border-radius: 5px;
@@ -162,6 +183,7 @@ a.nav-button:hover {
    
 }
 
+/* Style 'inactive' button (not clickable, has title) */
 a.grey-button:link, a.grey-button:hover, a.grey-button:visited {
   background-color: #c6c6c6;
 }
@@ -188,6 +210,12 @@ nav {
   overflow: visible;
   height: 40px;
 
+}
+
+.all-credits{
+  display: flex;
+  column-gap: 40px;
+  align-content: center;
 }
 
 /* Footer link styling (left hand side) */
