@@ -242,6 +242,8 @@ a.legend {
 
 .icon-list {
   display: grid;
+  height: fit-content;
+
   padding: 10px;
   border-radius: 5px;
   color: #000;

@@ -86,7 +86,7 @@ a.play, a.trait{
 
 }
 
-/* Set category icon to 50px */
+/* Clickable icon styling */
 .icon-row a img {
     border: 1px solid #000;
     padding: 15px;
