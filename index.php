@@ -1,10 +1,10 @@
-<!DOCTYPE HTML>
 
-<?php 
-    
+<!DOCTYPE html>
+
+<?php
     include("config.php");
     include("functions.php");
-
+    
     // Connect to database...
     $dbconnect=mysqli_connect(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_NAME);
 
@@ -17,70 +17,47 @@
     ob_start();
     session_start();
 
-    // need this so that we don't get header issues when users try to log in.
-    if (isset($_REQUEST['login'])) {
-    include("admin/adminlogin.php");
-    exit;
-    }
-
-    // logs users out if logout button is pressed.
-    if (isset($_GET['logout'])) {
-    session_unset(); 
-    session_destroy(); 
-    header("Location: index.php?page=admin/login");
-    exit;
-    }
-
-
-
 ?>
 
 <html lang="en">
 
-<?php 
+<?php
     include("content/head.php");
 ?>
 
+<body>
 
-  <body>
+    <div class="wrapper">
 
+    <?php 
+        include("content/banner_nav.php");
+    ?>
 
-  <div class="wrapper">
-
-    <?php include("content/banner_nav.php"); ?>
-
-    <main class="common">
-
-
-    <?php
-    
+    <main class="pad-20">
+        <?php
+        
         // either display contents of link or default to home page
-
-        if(!isset($_REQUEST['page'])) {
-            include("content/home.php");
-
-        } // end of home page if
+        if(!isset($_REQUEST['page'])) 
+            {
+                include("content/home.php");
+            }
 
         else {
-            $page = preg_replace('/[^0-9a-zA-Z]-/', '', $_REQUEST['page']);
+            $page = preg_replace('/[^0-9a-zA-Z]-/','',$_REQUEST['page']);
             include("$page.php");
         }
 
+
+        ?>
+    </main>  
+
+    <?php
+        include("content/footer.php");
     ?>
 
-    </main>
+    </div>  <!-- / wrapper -->
 
-    <footer class="common">
-        <?php include("content/footer.php"); ?>
+</body>
 
-    </footer>
 
-</div>  <!-- / wrapper -->
-
-  </body>
 </html>
-
-<?php
-// Flush and end output buffering at the very end (part of making our header(Location:foo) code work correctly)
-ob_end_flush();
-?>

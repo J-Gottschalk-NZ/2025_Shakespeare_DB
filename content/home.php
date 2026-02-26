@@ -8,7 +8,7 @@
     // Set up query
     // $sql_condition = "ORDER BY RAND() LIMIT 5";
     
-    $sql_condition = "WHERE `Featured` LIKE ? AND `Featured` !='' ORDER BY `Featured` ASC";    
+    $sql_condition = "WHERE `Featured_Image` LIKE ? AND `Featured_Image` !='' ORDER BY `Featured_Image` ASC";    
     list($find_query, $find_count) = get_query($dbconnect, $sql_condition, $params);
 
     
@@ -33,7 +33,7 @@
 
     while($find_rs = mysqli_fetch_assoc($find_query)) {
 
-    $avatar = "images/avatars/".$find_rs['Featured'];
+    $avatar = "images/avatars/".$find_rs['Featured_Image'];
 
 
 
@@ -41,7 +41,7 @@
     // This is mostly to make searching / clickable links easy
     $ID = $find_rs['ID'];
     
-    $character = $find_rs['Character_Name'];
+    $character = $find_rs['Character_name'];
     $play = $find_rs['Play'];
     $category = $find_rs['Play_Cat'];
     $gender = $find_rs['M_or_F'];
@@ -54,7 +54,7 @@
     $trait2 = $find_rs['Trait2'];
     $trait3 = $find_rs['Trait3'];
 
-    $featured = $find_rs['Featured'];
+    $featured = $find_rs['Featured_Image'];
 
     // Image and icon set up...
     $category_icon = "images/icons/".$find_rs['Category_Icon'];

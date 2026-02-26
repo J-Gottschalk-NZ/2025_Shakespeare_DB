@@ -1,9 +1,8 @@
 <?php
 
 function get_query($dbconnect, $sql_condition, $params = [])
-{
-
-    // s ==> shake_data table
+ {
+   // d ==> data table
     // c ==> category table
     // a ==> cod_action
 	// m ==> cod_method
@@ -14,74 +13,67 @@ function get_query($dbconnect, $sql_condition, $params = [])
 	// p ==> play_name
 
     $find_sql = "
-        SELECT 
-            s.*,
-            p.*,
-            r.*,
-            g.*,
+    SELECT d.*,
+            p.*, 
             c.*,
+            g.*,
+            r.*,
             ma.*,
             a.*,
             m.*,
-
+            
             -- 'Trait' is the COLUMN name with the 'word'
             k1.Trait AS Trait1,
             k2.Trait AS Trait2,
-            k3.Trait AS Trait3
+            k3.Trait AS Trait3            
 
-        FROM shake_data s
+    FROM data d
 
-        JOIN play_name p ON p.PlayID = s.PlayID
-        JOIN ms_role r ON r.RoleID = s.RoleID
-        JOIN gender g ON g.GenderID = s.GenderID
-        JOIN category c ON c.CategoryID = p.CategoryID
-        JOIN moral_alignment ma ON ma.Moral_AlignmentID = s.Moral_AlignmentID
-        JOIN key_traits k1 ON s.Trait_1ID = k1.TraitID
-        JOIN key_traits k2 ON s.Trait_2ID = k2.TraitID
-        JOIN key_traits k3 ON s.Trait_3ID = k3.TraitID
-        JOIN cod_action a ON s.COD_ActionID = a.COD_ActionID
-        JOIN cod_method m ON s.COD_MethodID = m.COD_MethodID
-        
-        -- Adds additional sql condition
-        $sql_condition
+    JOIN play_name p ON p.PlayID = d.PlayID
+    JOIN category c ON c.CategoryID = p.CategoryID
+    JOIN gender g ON g.GenderID = d.GenderID
+    JOIN ms_role r ON r.RoleID = d.RoleID
+    JOIN moral_alignment ma ON ma.Moral_AlignmentID = d.Moral_AlignmentID
+    JOIN cod_action a ON a.COD_ActionID = d.COD_ActionID
+    JOIN cod_method m ON m.COD_MethodID = d.COD_MethodID
+    JOIN key_traits k1 ON d.Trait_1ID = k1.TraitID
+    JOIN key_traits k2 ON d.Trait_2ID = k2.TraitID
+    JOIN key_traits k3 ON d.Trait_3ID = k3.TraitID
+
+    -- Adds additional sql condition
+    $sql_condition
+
     ";
 
-    // Prepare statement (OO-style)
-    $stmt = $dbconnect->prepare($find_sql);
-    if (!$stmt) {
-        die("Prepare failed: " . $dbconnect->error);
-    }
+     // Prepared Statements
+    $stmnt = $dbconnect -> prepare($find_sql);
 
-    // Bind parameters if provided
-    if (!empty($params)) {
-        $types = str_repeat('s', count($params));  // all params treated as strings
-
-        // bind_param requires references
-        $bind_values = [];
-        foreach ($params as $key => $value) {
+    if(!empty($params)) {
+          $types = str_repeat('s', count($params));  // all params treated as strings
+          
+          $bind_values = [];
+          foreach ($params as $key => $value) {
             $bind_values[$key] = &$params[$key];
-        }
+          }  // end bind fo each    
+          
+      array_unshift($bind_values, $types);
+      call_user_func_array([$stmnt, 'bind_param'], $bind_values);
 
-        array_unshift($bind_values, $types);
+    } // end bind parameters if
 
-        call_user_func_array([$stmt, 'bind_param'], $bind_values);
-    }
+    $stmnt -> execute();
 
-    // Execute
-    $stmt->execute();
+    $find_query = $stmnt -> get_result();
+    $find_count = $find_query -> num_rows;
 
-    // Get result
-    $find_query = $stmt->get_result();
-    $find_count = $find_query->num_rows;
-
-    // Close statement
-    $stmt->close();
+    $stmnt -> close();
 
     return [$find_query, $find_count];
-}
 
+ }
 
-function to_clean($data) {
+ // trims white space from our search term
+ function to_clean($data) {
 	$data = trim($data);	
 	return $data;
 }
@@ -89,17 +81,20 @@ function to_clean($data) {
 // generate drop down menu based on table
 function get_options($dbconnect, $table, $idField, $valueField) {
 
-    // get options from database table
-    // $dropdownSql = "SELECT * FROM `$table` ORDER BY `$orderBy` ASC";
+    // retrieve options from database
     $dropdownSql = "SELECT * FROM `$table` ORDER BY `$table`.`$valueField` ASC ";
-    
     $dropdownQuery = mysqli_query($dbconnect, $dropdownSql);
 
-    	// iterate through DB to create options
-        while ($dropdownRs = mysqli_fetch_assoc($dropdownQuery)) 
-		{
-        echo '<option value="' . $dropdownRs[$idField] . '">' . $dropdownRs[$valueField] . '</option>';
-		}
+    // create options!
+    while($dropdownRs = mysqli_fetch_assoc($dropdownQuery)) {
+
+      ?>
+        <option value="<?= $dropdownRs[$idField]; ?>">
+          <?= htmlspecialchars($dropdownRs[$valueField]); ?>
+        </option>
+      <?php
+
+    } // end dropdown while
 
 }
 
@@ -121,24 +116,26 @@ return $all_items;
     
 }
 
-
 // get search ID
 function get_search_ID($dbconnect, $search_term)
 {
-	$find_sql = "SELECT * FROM key_traits WHERE Trait LIKE '$search_term'";
-	$find_query = mysqli_query($dbconnect, $find_sql);
-	$find_rs = mysqli_fetch_assoc($find_query);
+    $stmnt_findID = $dbconnect -> prepare("SELECT * FROM key_traits WHERE Trait LIKE ?");
+    $stmnt_findID -> bind_param("s", $search_term);
+    $stmnt_findID -> execute();
 
-	// count results
-	$find_count = mysqli_num_rows($find_query);
+    $result = $stmnt_findID -> get_result();
+    $find_rs = $result -> fetch_assoc();
+    $find_count = $result -> num_rows;
 
-	if($find_count == 1) {
+  if($find_count == 1) {
 	return $find_rs['TraitID'];
 	}
 	else {
 		return "no results";
 	}
-}
 
+    $stmnt_findID -> close();
+
+}
 
 ?>
