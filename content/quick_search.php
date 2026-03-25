@@ -1,7 +1,7 @@
     <?php
 
     // default search order and help text
-    $order = " ORDER BY s.Character_Name ASC";
+    $order = " ORDER BY d.Character_name ASC";
     $help_text = "";
 
 
@@ -35,7 +35,7 @@
     // Dictionary containing 'single' searches and columns
     $search_columns = [
     "play"      => "Play",
-    "character"  => "Character_Name",
+    "character"  => "Character_name",
     ];
 
 // Query for play / character (single column)
@@ -53,7 +53,7 @@ elseif ($search_type == "quick")
     WHERE `Play` LIKE ?
     OR `Method` LIKE ?
     OR `Action` LIKE ?
-    OR `Character_Name` LIKE ?    
+    OR `Character_name` LIKE ?    
     OR k1.Trait LIKE ?
     OR k2.Trait LIKE ?
     OR k3.Trait LIKE ?    

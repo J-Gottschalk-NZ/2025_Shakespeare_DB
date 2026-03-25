@@ -1,4 +1,4 @@
-<div class = "admin-form">
+<div class="admin-form">
 
 <h2>Login</h2>
 
@@ -8,18 +8,22 @@
 
     <?php
 
-    if (isset($_GET['error'])) {
+    if(isset($_GET['error'])) {
+
         ?>
-        <div class="error">
-            <?php echo $_GET['error'] ?> 
-    </div>
+            <div class="error">
+            <?= $_GET['error'] ?> 
+        </div>
 
         <?php
-    } // end of get error if
+
+    } // end error if
 
     ?>
 
-    <p><input class="form-submit" type="submit" name="login" value="Log In" /></p>
+    <button class="form-submit pad-10" type="submit" name="login">Log In</button>
+
+
 </form>
 
 </div>

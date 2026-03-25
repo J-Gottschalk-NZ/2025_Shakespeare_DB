@@ -1,6 +1,6 @@
 <?php
 
-if(isset($_REQUEST['login'])) { 
+if(isset($_REQUEST['login'])) {
 
     // get username from form
     $username = $_REQUEST['username'];
@@ -16,20 +16,24 @@ if(isset($_REQUEST['login'])) {
     $login_stmt->close();
 
     // First check: Did we find a user AND password matches?
-    if ($login_rs && password_verify($_REQUEST['password'], $login_rs['password'])) {
+    if($login_rs && password_verify($_REQUEST['password'], $login_rs['password'])) {
 
         $_SESSION['admin'] = $login_rs['username'];
         header("Location: index.php?page=admin/add_entry");
         exit;
 
-    } else {
+    } // end user if (success)
+
+    else {
 
         unset($_SESSION);
         $login_error = urlencode("Incorrect username / password");
         header("Location: index.php?page=admin/login&error=$login_error");
         exit;
 
-    }
+     } // end 'else' (login failed)
 
-}
+
+}   // admin login button pushed
+
 ?>

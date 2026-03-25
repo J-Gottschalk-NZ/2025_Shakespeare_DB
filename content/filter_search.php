@@ -1,7 +1,7 @@
     <?php
 
     // default search order and help text
-    $order = " ORDER BY s.Character_Name ASC";
+    $order = " ORDER BY d.Character_Name ASC";
     $help_text = "";
 
     // retrieve user input ...  
@@ -30,11 +30,11 @@
     $all_characters = "%%";
    
     $sql_condition = "
-    WHERE s.PlayID  LIKE ?
-    AND s.RoleID LIKE ?
-    AND s.COD_ActionID LIKE ?
-    AND s.COD_MethodID LIKE ?
-    AND s.Moral_AlignmentID LIKE ?
+    WHERE d.PlayID  LIKE ?
+    AND d.RoleID LIKE ?
+    AND d.COD_ActionID LIKE ?
+    AND d.COD_MethodID LIKE ?
+    AND d.Moral_AlignmentID LIKE ?
 
     "; 
 

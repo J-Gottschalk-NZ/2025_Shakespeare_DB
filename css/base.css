@@ -120,14 +120,14 @@ a.grey-button:link, a.grey-button:hover, a.grey-button:visited {
 }
 
 /* Footer link styling (left hand side) */
-footer a {
+.footer-left-text a {
   color: var(--white);
   font-weight: bold;
   text-decoration: none;
   padding-right: 50px;
 }
 
-footer a:hover{
+.footer-left-text a:hover{
   color: var(--hover-peach);
 }
 

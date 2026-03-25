@@ -53,7 +53,7 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
     // This is mostly to make searching / clickable links easy
     $ID = $find_rs['ID'];
     
-    $character = $find_rs['Character_Name'];
+    $character = $find_rs['Character_name'];
     $play = $find_rs['Play'];
     $category = $find_rs['Play_Cat'];
     $gender = $find_rs['M_or_F'];
@@ -66,7 +66,7 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
     $trait2 = $find_rs['Trait2'];
     $trait3 = $find_rs['Trait3'];
 
-    $featured = $find_rs['Featured'];
+    $featured = $find_rs['Featured_Image'];
 
     // Image and icon set up...
     $category_icon = "images/icons/".$find_rs['Category_Icon'];
@@ -108,8 +108,8 @@ while($find_rs = mysqli_fetch_assoc($find_query)) {
         [$gender, $click_type."gender".$click_term.$gender, $gender_icon],
         [$role, $click_type."ms_role".$click_term.$role, $role_icon],
         [$alignment, $click_type."moral_alignment".$click_term.$alignment, $alignment_icon],
-        [$action, $click_type."cod_action".$click_term.$action, $action_icon],
-        [$method, $click_type."cod_method".$click_term.$method, $method_icon]
+        [$action, $click_type."cod_action".$click_term.urlencode($action), $action_icon],
+        [$method, $click_type."cod_method".$click_term.urlencode($method), $method_icon]
 
     ];
 

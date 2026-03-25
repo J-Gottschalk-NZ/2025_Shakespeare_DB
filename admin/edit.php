@@ -7,11 +7,10 @@ if(isset($_SESSION['admin'])) {
     $ID = $_REQUEST['ID'];
 
     // get Key Traits from database
-$all_traits_sql = "SELECT * FROM key_traits ORDER BY Trait ASC ";
-$all_traits = autocomplete_list($dbconnect, $all_traits_sql, 'Trait');
+    $all_traits_sql = "SELECT * FROM key_traits ORDER BY Trait ASC ";
+    $all_traits = autocomplete_list($dbconnect, $all_traits_sql, 'Trait');
 
-
-    // retrieve contents of quote
+    // retrieve entry details
     $get_entry_sql = "WHERE ID LIKE ?";
     $params = [$ID];
 
@@ -20,7 +19,7 @@ $all_traits = autocomplete_list($dbconnect, $all_traits_sql, 'Trait');
     $get_entry_rs = mysqli_fetch_assoc($get_entry_query);
 
     // retrieve existing data to populate form
-    $character_name = $get_entry_rs['Character_Name'];
+    $character_name = $get_entry_rs['Character_name'];
     $description = $get_entry_rs['Description'];
 
     $PlayID = $get_entry_rs['PlayID'];
@@ -50,84 +49,95 @@ $all_traits = autocomplete_list($dbconnect, $all_traits_sql, 'Trait');
     if($trait_3 == "n/a") {$trait_3 = "";}
 
 
+// set up dropdown array...
 
-    // retrieval name | table | ID | Value | Placeholder, Value ID
-    $dropdown_details = [
+        // retrieval name | table | ID | Value | "Placeholder" | value ID
+        $dropdown_details = [
         ['play', 'play_name', 'PlayID', 'Play', $Play, $PlayID],
-        ['gender', 'gender', 'GenderID', 'M_or_F', $Gender, $GenderID],
+       ['gender', 'gender', 'GenderID', 'M_or_F', $Gender, $GenderID],
         ['role', 'ms_role', 'RoleID', 'Role', $Role, $RoleID],
         ['alignment', 'moral_alignment', 'Moral_AlignmentID', 'Alignment', $Alignment, $Moral_AlignmentID],
         ['COD_action', 'cod_action', 'COD_ActionID', 'Action', $COD_Action, $COD_ActionID],
         ['COD_method', 'cod_method', 'COD_MethodID', 'Method', $COD_Method, $COD_MethodID],
-    ];
 
+        ];
 
 ?>
 
 <div class="big-form">
 
-<h2>Edit Entry</h2>
+    <h2>Edit Entry</h2>
 
-<form action="index.php?page=admin/edit_entry&ID=<?= $ID; ?>" method="post">
+    <form action="index.php?page=admin/edit_entry&ID=<?= $ID; ?>" method="post">
 
-    <p>
-        <input name="character" value="<?= htmlspecialchars($character_name); ?>" required/>
-    </p>
+        <p><input name="character" value="<?= htmlspecialchars($character_name); ?>" required></p>
 
-    <!-- Dropdown boxes -->
-    <?php
-        // Loop through dropdown details
-        foreach ($dropdown_details as $drop) {
+        <?php 
+        
+        // Loop to generate drop downs...
+        foreach($dropdown_details as $drop) {
             list($name, $table, $id_field, $label_field, $placeholder, $value) = $drop;
+        ?>
 
-            echo '<select name="' . htmlspecialchars($name) . '" class="big-dropdown" required>';
-            echo '<option value="'.htmlspecialchars($value).'" selected>' . htmlspecialchars($placeholder) . '</option>';
-            get_options($dbconnect, $table, $id_field, $label_field);
-            echo '</select>';
-        }
+        <select class="marg-bottom" name="<?= htmlspecialchars($name); ?>" required>
+            <option value="<?= htmlspecialchars($value); ?>" selected><?= htmlspecialchars($placeholder); ?></option>
+           
+            <?php             
+                get_options($dbconnect, $table, $id_field, $label_field);
+            ?>
+
+        </select>
+
+        <?php
+
+        } // end dropdown foreach
+
         ?>
 
     <p>
         <textarea name="description" required><?= htmlspecialchars($description); ?></textarea>
+
     </p>
 
-    <div class="autocomplete">
-            <input name="Trait1" id="Trait1" value="<?= htmlspecialchars($trait_1); ?>" required />
-        </div>
+    <div class="autocomplete marg-bottom">
+            <input name="Trait1" id="Trait1" value="<?= htmlspecialchars($trait_1); ?>" required>
+    </div>  <!-- / autocomplete (trait 1) -->
 
-        <div class="autocomplete">
-            <input name="Trait2" id="Trait2" value="<?= htmlspecialchars($trait_2); ?>" />
-        </div>
+    <div class="autocomplete marg-bottom">
+        <input name="Trait2" id="Trait2" value="<?= htmlspecialchars($trait_2); ?>">
+    </div> <!-- / autocomplete (trait 2) -->
+ 
+    <div class="autocomplete marg-bottom">
+        <input name="Trait3" id="Trait3" value="<?= htmlspecialchars($trait_3); ?>">
+    </div> <!-- / autocomplete (trait 3) -->
 
+    <button class="form-submit pad-10" type="submit" name="submit">Submit</button>
 
-        <div class="autocomplete">
-            <input name="Trait3" id="Trait3" value="<?= htmlspecialchars($trait_3); ?>" />
-        </div>
+    </form>
 
+</div>  <!-- / big-form -->
 
-    <br /><br />
-
-    <p><input class="large-submit" type="submit" name="submit" value="Submit" /></p>
-</form>
-
-</div>  <!-- / big form -->
-
-    <script>
-        <?php include("autocomplete.php"); ?>  
-
-        /* Arrays containing lists. */
-        var all_traits = <?php print("$all_traits")?>;
-        autocomplete(document.getElementById("Trait1"), all_traits);
-        autocomplete(document.getElementById("Trait2"), all_traits);
-        autocomplete(document.getElementById("Trait3"), all_traits);
+<script>
+    <?php include("autocomplete.php"); ?>  
+    
+    /* Arrays containing lists. */
+    var all_traits = <?php print("$all_traits")?>;
+    autocomplete(document.getElementById("Trait1"), all_traits);
+    autocomplete(document.getElementById("Trait2"), all_traits);
+    autocomplete(document.getElementById("Trait3"), all_traits);
 
 
-    </script>
+</script>
 
-<?php 
-} else {
-    $login_error = 'Please login to access this page';
-    header("Location: index.php?page=admin/login&error=<?= urlencode($login_error) ?>");
+<?php
+
 }
+
+// not logged in else
+else {
+    $login_error = 'Please login to access this page';
+    header("Location: index.php?page=admin/login&error=$login_error");
+}
+
 
 ?>
