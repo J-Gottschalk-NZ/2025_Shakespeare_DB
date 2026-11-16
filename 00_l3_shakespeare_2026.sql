@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 25, 2026 at 07:08 PM
+-- Generation Time: Nov 16, 2026 at 08:31 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -24,13 +24,100 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `CategoryID` int NOT NULL AUTO_INCREMENT,
+  `Play_Cat` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Category_Icon` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`CategoryID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`CategoryID`, `Play_Cat`, `Category_Icon`) VALUES
+(1, 'Comedy', 'cat_comedy.png'),
+(2, 'History', 'cat_history.png'),
+(3, 'Tragedy', 'cat_tragedy.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cod_action`
+--
+
+DROP TABLE IF EXISTS `cod_action`;
+CREATE TABLE IF NOT EXISTS `cod_action` (
+  `COD_ActionID` int NOT NULL AUTO_INCREMENT,
+  `Action` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Action_Icon` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`COD_ActionID`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cod_action`
+--
+
+INSERT INTO `cod_action` (`COD_ActionID`, `Action`, `Action_Icon`) VALUES
+(1, 'Alive', 'COD_alive.png'),
+(2, 'Accident', 'COD_accident.png'),
+(3, 'Death in battle', 'COD_battle.png'),
+(4, 'Execution', 'COD_execution.png'),
+(5, 'Murder', 'COD_murder.png'),
+(6, 'Natural causes', 'COD_natural_causes.png'),
+(7, 'Suicide', 'COD_suicide.png'),
+(8, 'Supernatural death', 'COD_supernatural.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cod_method`
+--
+
+DROP TABLE IF EXISTS `cod_method`;
+CREATE TABLE IF NOT EXISTS `cod_method` (
+  `COD_MethodID` int NOT NULL AUTO_INCREMENT,
+  `Method` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Method_Icon` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`COD_MethodID`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cod_method`
+--
+
+INSERT INTO `cod_method` (`COD_MethodID`, `Method`, `Method_Icon`) VALUES
+(1, 'Alive', 'COD_alive_method.png'),
+(2, 'arrow', 'COD_arrow.png'),
+(3, 'beheading', 'COD_beheading.png'),
+(4, 'bludgeoning', 'COD_bludgeon.png'),
+(5, 'burning', 'COD_burning.png'),
+(6, 'drowning', 'COD_drowning.png'),
+(7, 'fall', 'COD_falling.png'),
+(8, 'ghost/curse', 'COD_ghost_curse.png'),
+(9, 'hanging', 'COD_hanging.png'),
+(10, 'illness', 'COD_sickness.png'),
+(11, 'old age', 'COD_oldage.png'),
+(12, 'poisoning', 'COD_poison.png'),
+(13, 'unknown means', 'COD_unknown.png'),
+(14, 'stabbing', 'COD_stabbing.png'),
+(15, 'starvation', 'COD_starvation.png'),
+(16, 'strangulation', 'COD_strangulation.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `data`
 --
 
 DROP TABLE IF EXISTS `data`;
 CREATE TABLE IF NOT EXISTS `data` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `Character_name` varchar(128) NOT NULL,
+  `Character_name` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `PlayID` int NOT NULL,
   `RoleID` int NOT NULL,
   `GenderID` int NOT NULL,
@@ -40,10 +127,10 @@ CREATE TABLE IF NOT EXISTS `data` (
   `Trait_3ID` int NOT NULL,
   `COD_ActionID` int NOT NULL,
   `COD_MethodID` int NOT NULL,
-  `Description` varchar(255) NOT NULL,
-  `Featured_Image` varchar(150) NOT NULL,
+  `Description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Featured_Image` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=166 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `data`
@@ -125,7 +212,6 @@ INSERT INTO `data` (`ID`, `Character_name`, `PlayID`, `RoleID`, `GenderID`, `Mor
 (73, 'Posthumus', 26, 1, 1, 1, 67, 8, 47, 1, 1, 'A nobleman banished by Cymbeline, proving his loyalty through trials.', ''),
 (74, 'Sicilius Leonatus', 26, 2, 1, 2, 8, 88, 101, 6, 11, 'Deceased father of Posthumus; appears as a spirit to offer encouragement.', ''),
 (75, 'Claudius', 27, 1, 1, 3, 90, 1, 31, 5, 14, 'The antagonist of Hamlet, Claudius murders the king to claim the throne.', ''),
-(76, 'Gertrude', 27, 3, 2, 2, 87, 22, 99, 1, 12, 'Queen of Denmark, caught between loyalty to her son and new husband.', ''),
 (77, 'Ghost of Hamlet\'s Father', 27, 3, 1, 1, 169, 101, 96, 8, 8, 'Former king whose ghost urges Hamlet to avenge his murder.', ''),
 (78, 'Guildenstern', 27, 3, 1, 2, 103, 167, 42, 4, 9, 'Messenger sent to England with Hamlet, executed upon arrival.', ''),
 (79, 'Horatio', 27, 3, 1, 1, 88, 175, 10, 1, 1, 'Hamlet’s trusted friend and confidant, survives to tell the tale.', ''),
@@ -186,7 +272,6 @@ INSERT INTO `data` (`ID`, `Character_name`, `PlayID`, `RoleID`, `GenderID`, `Mor
 (134, 'Metellus Cimber', 28, 2, 1, 3, 90, 150, 31, 4, 14, 'He distracts Caesar by pleading for his brother\'s repeal, allowing the conspirators to attack.', ''),
 (135, 'Mark Antony', 28, 1, 1, 2, 13, 27, 1, 1, 1, 'A skilled orator and politician, Antony avenges Caesar\'s death and seeks power in Rome.', ''),
 (136, 'Louis the Dauphin', 20, 3, 1, 3, 1, 105, 33, 1, 1, 'Seizes the opportunity to claim the English throne, leading French forces against England.', ''),
-(137, 'Antipholus of Syracuse', 3, 1, 1, 1, 23, 33, 88, 1, 1, 'One of two twin brothers separated in childhood; his misidentification drives the farcical misunderstandings.', ''),
 (138, 'Octavius Caesar', 28, 1, 1, 1, 1, 4, 150, 6, 11, 'Caesar\'s adopted son and heir; he rises to power after Caesar\'s assassination.', ''),
 (139, 'Berowne (Biron)', 4, 1, 1, 2, 176, 144, 139, 1, 1, 'A clever and witty member of the King’s court who values learning and love, often using humour to mask uncertainty.', ''),
 (140, 'Pindarus', 28, 2, 1, 2, 88, 103, 132, 7, 14, 'Cassius\'s bondman who assists in his suicide and then gains his freedom.', ''),
@@ -195,7 +280,6 @@ INSERT INTO `data` (`ID`, `Character_name`, `PlayID`, `RoleID`, `GenderID`, `Mor
 (143, 'Mistress Ford', 7, 1, 2, 2, 121, 14, 124, 1, 1, 'A married woman who conspires with Mistress Page to expose Falstaff’s advances, using wit and resourcefulness.', ''),
 (144, 'Titinius', 28, 2, 1, 2, 88, 8, 67, 7, 14, 'After finding Cassius dead, he takes his own life out of loyalty and grief.', ''),
 (145, 'Beatrice', 9, 1, 2, 1, 146, 176, 75, 1, 1, 'An intelligent and outspoken woman who sparrs verbally with Benedick before recognizing her love for him.', ''),
-(146, 'Arthur', 20, 3, 1, 1, 76, 172, 163, 1, 7, 'A young prince with a claim to the throne, whose tragic fate is central to the play\'s conflict.', ''),
 (147, 'Katherina (Kate)', 10, 1, 2, 2, 64, 51, 125, 1, 1, 'A spirited and quick-tempered woman whose relationship with Petruchio explores themes of marriage and social roles.', ''),
 (148, 'Cardinal Pandulph', 20, 3, 1, 2, 90, 4, 112, 1, 1, 'The Pope\'s representative who excommunicates King John and plays a key role in the political dynamics.', ''),
 (149, 'Prospero', 11, 1, 1, 1, 85, 169, 124, 1, 1, 'The rightful Duke of Milan who uses magic to restore his daughter and reclaim his dukedom, balancing revenge with mercy.', ''),
@@ -212,7 +296,355 @@ INSERT INTO `data` (`ID`, `Character_name`, `PlayID`, `RoleID`, `GenderID`, `Mor
 (160, 'Timon of Athens', 33, 1, 1, 2, 54, 5, 93, 7, 15, 'A wealthy Athenian whose extreme generosity is repaid with ingratitude; he retreats into misanthropy and dies alone.', ''),
 (161, 'Titus Andronicus', 34, 1, 1, 1, 149, 169, 68, 5, 14, 'A Roman general whose cycle of revenge and brutality leads to horrific personal losses and violent reprisals.', ''),
 (162, 'Cressida', 35, 1, 2, 2, 173, 107, 22, 1, 1, 'A Trojan woman whose changing affections and the complex ethics of love and honour are central to the play\'s ambiguity.', ''),
-(165, 'Tybalt\'s description', 32, 2, 1, 3, 70, 184, 184, 5, 14, 'Tybalt\'s Description Edited again', '');
+(164, 'Antonio edited', 6, 1, 1, 1, 54, 88, 92, 1, 1, 'A merchant who risks his life for Bassanio, agreeing to a bond with Shylock.', ''),
+(169, 'Bassanio ', 6, 1, 1, 1, 33, 180, 139, 1, 1, 'Suitor to Portia whose quest for marriage leads Antonio into a dangerous bond.\r\n', ''),
+(170, 'Tybalt', 32, 2, 1, 3, 70, 107, 3, 5, 14, 'Foolish man who got stabbed.', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gender`
+--
+
+DROP TABLE IF EXISTS `gender`;
+CREATE TABLE IF NOT EXISTS `gender` (
+  `GenderID` int NOT NULL AUTO_INCREMENT,
+  `M_or_F` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Gender_Icon` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`GenderID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `gender`
+--
+
+INSERT INTO `gender` (`GenderID`, `M_or_F`, `Gender_Icon`) VALUES
+(1, 'Male', 'gender_male_icon.png'),
+(2, 'Female', 'gender_female_icon.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `key_traits`
+--
+
+DROP TABLE IF EXISTS `key_traits`;
+CREATE TABLE IF NOT EXISTS `key_traits` (
+  `TraitID` int NOT NULL AUTO_INCREMENT,
+  `Trait` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`TraitID`)
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `key_traits`
+--
+
+INSERT INTO `key_traits` (`TraitID`, `Trait`) VALUES
+(1, 'Ambitious'),
+(2, 'Anxious'),
+(3, 'Arrogant'),
+(4, 'Authoritative'),
+(5, 'Bitter'),
+(6, 'Boastful'),
+(7, 'Bold'),
+(8, 'Brave'),
+(9, 'Calculating'),
+(10, 'Calm'),
+(11, 'Caring'),
+(12, 'Cautious'),
+(13, 'Charismatic'),
+(14, 'Clever'),
+(15, 'Cold'),
+(16, 'Comedic'),
+(17, 'Comic'),
+(18, 'Commanding'),
+(19, 'Compassionate'),
+(20, 'Composed'),
+(21, 'Concerned'),
+(22, 'Conflicted'),
+(23, 'Confused'),
+(24, 'Cooperative'),
+(25, 'Cowardly'),
+(26, 'Cruel'),
+(27, 'Cunning'),
+(28, 'Curious'),
+(29, 'Cynical'),
+(30, 'Deceitful'),
+(31, 'Deceptive'),
+(32, 'Delusional'),
+(33, 'Determined'),
+(34, 'Devoted'),
+(35, 'Devout'),
+(36, 'Dignified'),
+(37, 'Diplomatic'),
+(38, 'Disciplined'),
+(39, 'Dismissive'),
+(40, 'Divine'),
+(41, 'Drunken'),
+(42, 'Dutiful'),
+(43, 'Eager'),
+(44, 'Eloquent'),
+(45, 'Emotional'),
+(46, 'Envious'),
+(47, 'Faithful'),
+(48, 'Fearless'),
+(49, 'Fickle'),
+(50, 'Fierce'),
+(51, 'Fiery'),
+(52, 'Foolish'),
+(53, 'Formal'),
+(54, 'Generous'),
+(55, 'Gentle'),
+(56, 'Gluttonous'),
+(57, 'Greedy'),
+(58, 'Grieving'),
+(59, 'Grumpy'),
+(60, 'Guilt-ridden'),
+(61, 'Guilty'),
+(62, 'Gullible'),
+(63, 'Harsh'),
+(64, 'Headstrong'),
+(65, 'Helpful'),
+(66, 'Honest'),
+(67, 'Honorable'),
+(68, 'Honourable'),
+(69, 'Hospitable'),
+(70, 'Hot-headed'),
+(71, 'Idealistic'),
+(72, 'Imaginative'),
+(73, 'Impulsive'),
+(74, 'Indecisive'),
+(75, 'Independent'),
+(76, 'Innocent'),
+(77, 'Insecure'),
+(78, 'Insightful'),
+(79, 'Inspirational'),
+(80, 'Intelligent'),
+(81, 'Jealous'),
+(82, 'Just'),
+(83, 'Kind'),
+(84, 'Lazy'),
+(85, 'Learned'),
+(86, 'Logical'),
+(87, 'Loving'),
+(88, 'Loyal'),
+(89, 'Mad'),
+(90, 'Manipulative'),
+(91, 'Meek'),
+(92, 'Melancholic'),
+(93, 'Misanthropic'),
+(94, 'Mischievous'),
+(95, 'Mocking'),
+(96, 'Mournful'),
+(97, 'Mystical'),
+(98, 'Naive'),
+(99, 'Naïve'),
+(100, 'Nervous'),
+(101, 'Noble'),
+(102, 'Nosy'),
+(103, 'Obedient'),
+(104, 'Observant'),
+(105, 'Opportunistic'),
+(106, 'Paranoid'),
+(107, 'Passionate'),
+(108, 'Passive'),
+(109, 'Patriotic'),
+(110, 'Pedantic'),
+(111, 'Persistent'),
+(112, 'Persuasive'),
+(113, 'Philosophical'),
+(114, 'Pious'),
+(115, 'Playful'),
+(116, 'Polite'),
+(117, 'Political'),
+(118, 'Possessive'),
+(119, 'Powerful'),
+(120, 'Power-hungry'),
+(121, 'Practical'),
+(122, 'Pragmatic'),
+(123, 'Prophetic'),
+(124, 'Protective'),
+(125, 'Proud'),
+(126, 'Quiet'),
+(127, 'Rational'),
+(128, 'Rebellious'),
+(129, 'Reckless'),
+(130, 'Reflective'),
+(131, 'Regal'),
+(132, 'Reluctant'),
+(133, 'Repentant'),
+(134, 'Reserved'),
+(135, 'Resilient'),
+(136, 'Resolute'),
+(137, 'Resourceful'),
+(138, 'Respectful'),
+(139, 'Romantic'),
+(140, 'Royal'),
+(141, 'Ruthless'),
+(142, 'Sarcastic'),
+(143, 'Scheming'),
+(144, 'Scholarly'),
+(145, 'Selfless'),
+(146, 'Sharp-tongued'),
+(147, 'Shrewd'),
+(148, 'Simple'),
+(149, 'Stoic'),
+(150, 'Strategic'),
+(151, 'Strong-willed'),
+(152, 'Stubborn'),
+(153, 'Superstitious'),
+(154, 'Supportive'),
+(155, 'Sympathetic'),
+(156, 'Tactician'),
+(157, 'Talkative'),
+(158, 'Theatrical'),
+(159, 'Timid'),
+(160, 'Traditional'),
+(161, 'Tragic'),
+(162, 'Troubled'),
+(163, 'Trusting'),
+(164, 'Trustworthy'),
+(165, 'Tyrannical'),
+(166, 'Unnamed'),
+(167, 'Unsuspecting'),
+(168, 'Vain'),
+(169, 'Vengeful'),
+(170, 'Violent'),
+(171, 'Virtuous'),
+(172, 'Vulnerable'),
+(173, 'Wavering'),
+(174, 'Weak'),
+(175, 'Wise'),
+(176, 'Witty'),
+(177, 'Zealous'),
+(178, 'Aggressive'),
+(179, 'n/a'),
+(180, 'Charming'),
+(181, 'Amazing'),
+(182, 'cool'),
+(183, 'yoh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `moral_alignment`
+--
+
+DROP TABLE IF EXISTS `moral_alignment`;
+CREATE TABLE IF NOT EXISTS `moral_alignment` (
+  `Moral_AlignmentID` int NOT NULL AUTO_INCREMENT,
+  `Alignment` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Moral_Icon` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`Moral_AlignmentID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `moral_alignment`
+--
+
+INSERT INTO `moral_alignment` (`Moral_AlignmentID`, `Alignment`, `Moral_Icon`) VALUES
+(1, 'Hero', 'Moral_Hero.png'),
+(2, 'Neutral', 'Moral_Neutral.png'),
+(3, 'Villain', 'Moral_villain.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ms_role`
+--
+
+DROP TABLE IF EXISTS `ms_role`;
+CREATE TABLE IF NOT EXISTS `ms_role` (
+  `RoleID` int NOT NULL AUTO_INCREMENT,
+  `Role` varchar(31) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Role_Icon` varchar(75) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`RoleID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ms_role`
+--
+
+INSERT INTO `ms_role` (`RoleID`, `Role`, `Role_Icon`) VALUES
+(1, 'Major', 'role_major_v2.png'),
+(2, 'Minor', 'role_minor_v2.png'),
+(3, 'Supporting', 'role_support_v2.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `play_name`
+--
+
+DROP TABLE IF EXISTS `play_name`;
+CREATE TABLE IF NOT EXISTS `play_name` (
+  `PlayID` int NOT NULL AUTO_INCREMENT,
+  `Play` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CategoryID` int NOT NULL,
+  PRIMARY KEY (`PlayID`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `play_name`
+--
+
+INSERT INTO `play_name` (`PlayID`, `Play`, `CategoryID`) VALUES
+(1, 'All\'s Well That Ends Well', 1),
+(2, 'As You Like It', 1),
+(3, 'Comedy of Errors', 1),
+(4, 'Love\'s Labour\'s Lost', 1),
+(5, 'Measure for Measure', 1),
+(6, 'The Merchant of Venice', 1),
+(7, 'Merry Wives of Windsor', 1),
+(8, 'A Midsummer Night\'s Dream', 1),
+(9, 'Much Ado about Nothing', 1),
+(10, 'Taming of the Shrew', 1),
+(11, 'Tempest', 1),
+(12, 'Twelfth Night', 1),
+(13, 'Two Gentlemen of Verona', 1),
+(14, 'Winter\'s Tale', 1),
+(15, 'Henry IV, Part I', 2),
+(16, 'Henry IV, Part II', 2),
+(17, 'Henry V', 2),
+(18, 'Henry VI', 2),
+(19, 'Henry VIII', 2),
+(20, 'King John', 2),
+(21, 'Pericles', 2),
+(22, 'Richard II', 2),
+(23, 'Richard III', 2),
+(24, 'Antony and Cleopatra', 3),
+(25, 'Coriolanus', 3),
+(26, 'Cymbeline', 3),
+(27, 'Hamlet', 3),
+(28, 'Julius Caesar', 3),
+(29, 'King Lear', 3),
+(30, 'Macbeth', 3),
+(31, 'Othello', 3),
+(32, 'Romeo and Juliet', 3),
+(33, 'Timon of Athens', 3),
+(34, 'Titus Andronicus', 3),
+(35, 'Troilus and Cressida', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `UserID` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`UserID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`UserID`, `username`, `password`) VALUES
+(1, 'admin', '$2a$12$od9pOzGP.yXbhOMlas5X4O.s04PoxoBvOiFvcURFoJyisHr6gCbNC');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
